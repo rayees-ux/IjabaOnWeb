@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IjabaOnWeb - ഇസ്ലാമിക് അറിവും മാർഗനിർദ്ദേശവും</title>
+    <link href="img/favicon.ico" rel="icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="css/app.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        /* New Navbar Styles */
+       
+        :root {
+            --masala-bg: #f8f6f2;
+            --masala-card: #ffffff;
+            --masala-green: #2e7d32;
+            --masala-green-soft: rgba(46, 125, 50, 0.1);
+            --masala-gold: #c7a025;
+            --masala-text: #23313a;
+            --masala-muted: #63727b;
+            --masala-border: rgba(46, 125, 50, 0.14);
+            --masala-shadow: 0 14px 36px rgba(46, 125, 50, 0.09);
+        }
+
+        body {
+            background: var(--masala-bg);
+            color: var(--masala-text);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .masala-section {
+            padding: 48px 0 72px;
+        }
+
+        .masala-shell {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.99));
+            border: 1px solid rgba(255, 255, 255, 0.75);
+            border-radius: 28px;
+            box-shadow: var(--masala-shadow);
+            padding: 36px 28px;
+        }
+
+        .masala-header {
+            text-align: center;
+            margin-bottom: 28px;
+            border-radius: 20px;
+            align-items: center;
+        }
+
+        .masala-title {
+            color: #ffffff;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+
+        .masala-subtitle {
+            color: var(--masala-white);
+            font-size: 1rem;
+            max-width: 760px;
+            margin: 0 auto;
+            line-height: 1.2;
+        }
+
+        .masala-controls {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 220px;
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .masala-input,
+        .masala-select {
+            width: 100%;
+            border: 1px solid var(--masala-border);
+            border-radius: 16px;
+            background: #fff;
+            padding: 14px 16px;
+            color: var(--masala-text);
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+        }
+
+        .masala-input:focus,
+        .masala-select:focus {
+            border-color: rgba(46, 125, 50, 0.35);
+            box-shadow: 0 0 0 4px rgba(46, 125, 50, 0.12);
+            transform: translateY(-1px);
+        }
+
+        .masala-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .masala-card {
+            background: var(--masala-card);
+            border: 1px solid var(--masala-border);
+            border-radius: 16px;
+            padding: 22px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .masala-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 34px rgba(46, 125, 50, 0.12);
+        }
+
+        .masala-card.expanded {
+            box-shadow: 0 18px 34px rgba(46, 125, 50, 0.12);
+        }
+
+        .masala-category {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: rgba(199, 160, 37, 0.13);
+            color: var(--masala-green);
+            font-size: 0.78rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .masala-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+            cursor: pointer;
+        }
+
+        .masala-question-main {
+            flex: 1;
+        }
+
+        .masala-label {
+            display: inline-block;
+            color: var(--masala-green);
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .masala-question-text {
+            font-size: 1.02rem;
+            font-weight: 700;
+            line-height: 1.75;
+        }
+
+        .masala-toggle {
+            flex-shrink: 0;
+            width: 36px;
+            height: 36px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--masala-green-soft);
+            color: var(--masala-green);
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .masala-card.expanded .masala-toggle {
+            transform: rotate(180deg);
+            background: rgba(46, 125, 50, 0.16);
+        }
+
+        .masala-answer-wrap {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.35s ease, opacity 0.3s ease, margin-top 0.3s ease;
+            margin-top: 0;
+        }
+
+        .masala-card.expanded .masala-answer-wrap {
+            opacity: 1;
+            margin-top: 18px;
+        }
+
+        .masala-answer {
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
+            padding-top: 16px;
+            color: var(--masala-muted);
+            font-size: 0.95rem;
+            line-height: 1.95;
+        }
+
+        .masala-actions {
+            margin-top: 16px;
+        }
+
+        .btn-masala {
+            border: none;
+            border-radius: 999px;
+            padding: 10px 14px;
+            background: var(--masala-green);
+            color: #fff;
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .btn-masala:hover {
+            transform: translateY(-1px);
+            opacity: 0.92;
+        }
+
+        .no-results {
+            display: none;
+            text-align: center;
+            color: var(--masala-muted);
+            padding: 32px 12px 0;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.45s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(14px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 991.98px) {
+            .masala-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .masala-section {
+                padding: 32px 0 56px;
+            }
+
+            .masala-shell {
+                padding: 26px 18px;
+                border-radius: 22px;
+            }
+
+            .masala-title {
+                font-size: 2rem;
+                text-align: center;
+                  width: 100%;
+            }
+
+            .masala-controls {
+                grid-template-columns: 1fr;
+            }
+
+            .masala-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 0;
+        }
+
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1.5rem;
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2e7d32;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .navbar-brand span {
+            color: #1b5e20;
+        }
+
+        .home-link {
+            text-decoration: none;
+            color: #2e7d32;
+            font-weight: 500;
+            font-family: 'Inter', sans-serif;
+            padding: 0.5rem 0.75rem;
+            border-radius: 8px;
+            transition: background 0.25s ease, color 0.25s ease;
+            display: inline-block;
+            white-space: nowrap;
+        }
+
+        .home-link:hover {
+            background: rgba(46, 125, 50, 0.1);
+            color: #1b5e20;
+        }
+
+        .navbar-nav {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 2rem;
+        }
+
+        .navbar-nav li {
+            position: relative;
+        }
+
+        .navbar-nav a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            font-family: 'Inter', sans-serif;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .navbar-nav a:hover, .navbar-nav a.active {
+            background: rgba(46, 125, 50, 0.1);
+            color: #2e7d32;
+            transform: translateY(-1px);
+        }
+
+        .navbar-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #333;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .navbar-admin {
+            background: #2e7d32;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.3s ease;
+        }
+
+        .navbar-admin:hover {
+            background: #1b5e20;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .navbar-nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                gap: 0;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+                border-radius: 0 0 8px 8px;
+            }
+
+            .navbar-nav.active {
+                display: flex;
+            }
+
+            .navbar-nav li {
+                border-bottom: 1px solid #f0f0f0;
+            }
+
+            .navbar-nav a {
+                padding: 1rem 1.5rem;
+                display: block;
+            }
+
+            .navbar-toggle {
+                display: block;
+            }
+
+            .navbar-container {
+                padding: 1rem;
+            }
+        }
+
+        .masala-container {
+            padding: 1rem;
+        }
+
+        .masala-item {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .masala-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+
+        .masala-header {
+            background: linear-gradient(135deg, #2e7d32, #1b5e20);
+            color: white;
+            padding: 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            text-align: center;
+        }
+
+        .masala-question {
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+        }
+
+        .masala-category {
+            background: rgba(255,255,255,0.2);
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .masala-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .masala-item.active .masala-icon {
+            transform: rotate(180deg);
+        }
+
+        .masala-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: #f9f9f9;
+        }
+
+        .masala-item.active .masala-content {
+            max-height: 500px;
+        }
+
+        .masala-answer {
+            padding: 1rem;
+            color: #333;
+            line-height: 1.6;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+        }
+
+        .error {
+            text-align: center;
+            padding: 2rem;
+            color: #c62828;
+            background: #ffebee;
+            border-radius: 8px;
+            margin: 1rem;
+        }
+        .masala-source {
+  margin-top: 12px;
+  padding: 10px;
+  background: #f4fbf6;
+  border-left: 4px solid #2e7d32;
+  border-radius: 8px;
+}
+
+.masala-source-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #2e7d32;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.masala-source-text {
+  font-size: 13px;
+  color: #333;
+}
+/* 🔻 Bottom Navigation (Mobile Only) */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    display: none;
+    justify-content: space-around;
+    align-items: center;
+    padding: 8px 0;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+.bottom-nav .nav-item {
+    text-align: center;
+    font-size: 12px;
+    color: #333;
+    text-decoration: none;
+}
+
+.bottom-nav .nav-item__icon {
+    display: block;
+    font-size: 18px;
+}
+
+.bottom-nav .nav-item__label {
+    font-size: 11px;
+}
+
+/* 📱 MOBILE VIEW */
+@media (max-width: 768px) {
+
+    /* Hide top navbar */
+    .navbar {
+        display: none;
+    }
+
+    /* Hide sidebar + toggle button */
+    .mobile-sidebar,
+    .mobile-menu-overlay,
+    .navbar-toggle {
+        display: none !important;
+    }
+
+    /* Show bottom nav */
+    .bottom-nav {
+        display: flex;
+    }
+
+    /* Prevent content hiding behind bottom nav */
+    body {
+        padding-bottom: 70px;
+    }
+}
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            
+            <a href="index-new.html" class="navbar-brand"> 
+                Ijaba<span>OnWeb</span>
+            </a>
+            <ul class="navbar-nav" id="navbarNav">
+                <li><a href="masala-new.html" class="active">Mas'ala</a></li>
+                <li><a href="artcle.html">Article</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact-new.html">Contact</a></li>
+                <li><a href="profile-new.html">Profile</a></li>
+            </ul>
+            <button class="navbar-toggle" id="navbarToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content Section -->
+    <section class="masala-section">
+        <div class="container">
+            <div class="masala-shell">
+                <div class="masala-header">
+                    <h1 class="masala-title">📚 മസ്അലകൾ</h1>
+                </div>
+
+                <div class="masala-controls">
+                    <input type="text" id="masalaSearch" class="masala-input" placeholder="ചോദ്യങ്ങൾ തിരയുക...">
+                    <select id="categoryFilter" class="masala-select">
+                        <option value="all">എല്ലാ വിഭാഗങ്ങളും</option>
+                        <option value="prayer">Prayer</option>
+                        <option value="fasting">Fasting</option>
+                        <option value="zakath">Zakath</option>
+                        <option value="hajj">Hajj</option>
+                        <option value="marriage">Marriage</option>
+                        <option value="ibadah">Ibadah</option>
+                        <option value="family">Family</option>
+                        <option value="business">Business</option>
+                        <option value="modern">Modern</option>
+                    </select>
+                </div>
+
+                <div id="masalaGrid" class="masala-grid"></div>
+                <div id="noResults" class="no-results">ഫലങ്ങളൊന്നും കണ്ടെത്താനായില്ല.</div>
+            </div>
+        </div>
+    </section>
+
+
+        <!-- BOTTOM NAVIGATION -->
+     <nav class="bottom-nav"></nav>
+    <nav class="bottom-nav">
+        <a href="index-new.html" class="nav-item" data-page="index-new.html">
+            <span class="nav-item__icon"><i class="bi bi-house"></i></span>
+            <span class="nav-item__label">Home</span>
+        </a>
+        <a href="masala-new.html" class="nav-item" data-page="masala-new.html">
+            <span class="nav-item__icon"><i class="bi bi-newspaper"></i></span>
+            <span class="nav-item__label">Mas'ala</span>
+        </a>
+        <a href="artcle.html" class="nav-item" data-page="artcle.html">
+            <span class="nav-item__icon"><i class="bi bi-journal"></i></span>
+            <span class="nav-item__label">Article</span>
+        </a>
+        <a href="contact-new.html" class="nav-item" data-page="contact-new.html">
+            <span class="nav-item__icon"><i class="bi bi-telephone"></i></span>
+            <span class="nav-item__label">Contact</span>
+        </a>
+        <a href="ask.html" class="nav-item" data-page="profile-new.html">
+            <span class="nav-item__icon"><i class="bi bi-question-circle"></i></span>
+            <span class="nav-item__label">Ask</span>
+        </a>
+    </nav>
+
+
+    <a href="#" class="btn btn-primary btn-square back-to-top"><i class="fa fa-arrow-up"></i></a>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="./js/ad.js"></script>
+    
+
+    <script>
+        const masalaData = [
+            {
+                category: "prayer",
+                question: "ജമാഅത്ത് നഷ്ടപ്പെടാതിരിക്കാൻ, ഇമാം അവസാനത്തെ അത്തഹിയ്യാത്തിൽ ഇരിക്കുമ്പോൾ പള്ളിയിലേക്ക് ഓടുന്നത് സുന്നത്താണോ?",
+                answer: "ജുമുഅ ഒഴികെയുള്ള ജമാഅത്തുകളിലേക്ക് ധൃതിയിൽ ഓടുന്നത് സുന്നത്തിൽപ്പെടുന്നില്ല. എന്നാൽ ജുമുഅ നഷ്ടപ്പെടുമെന്ന ആശങ്കയുള്ളവർക്ക്, ധൃതിയിൽ പോകുന്നത് നിർബന്ധമായിരിക്കും. إعانة الطالبين (221) "
+                
+            },
+            
+            {
+                category: "prayer",
+                question: "ഖുത്ബയ്ക്കായി ഖതീബ് മിമ്ബറിൽ കയറിയതിന് ശേഷം, ജുമുഅക്ക് മുമ്പുള്ള സുന്നത്ത് നമസ്കാരം നിർവഹിക്കാൻ പറ്റുമോ?",
+                answer: "ഇല്ല, ഖതീബ് മിമ്പറിൽ കയറിയതിന് ശേഷം തഹിയ്യത്തല്ലാത്ത മറ്റ് നിസ്കാരങ്ങൾ നിർവഹിക്കൽ തഹ്രീമിന്റെ കറാഹത്താണ്.               ( 101/2 - كتاب إعانة الطالبين على حل الفاظ فتح المعين)"
+            },
+            {
+                category: "prayer",
+                question: "നജസ് പിടിച്ച വസ്ത്രം ധരിച്ച് നമസ്കാരം ചെയ്യാമോ?",
+                answer: "“ഇല്ല. വസ്ത്രമോ ശരീരമോ നജസ്സുള്ള നിലയിൽ നമസ്കാരം ചെയ്യുന്നത് ശരിയല്ല. (Surah Al-Muddaththir 74:4)"
+            },
+            {
+                category: "prayer",
+                question: "ഇമാമിനും മറ്റൊരാളിനും സമാനമായ കർമണ്ഡലം ഉണ്ടെങ്കിൽ, ഇമാമാകാൻ മുൻഗണന ആർക്ക്?",
+                answer: "അവരിൽ ശരീഅത്ത് വിജ്ഞാനം കൂടുതൽ ഉള്ളവനെയാണ് മുൻഗണന നൽകേണ്ടത്. അതിലും തുല്യതയുണ്ടെങ്കിൽ, ഖുർആൻ പാരായണത്തിൽ മികച്ചവൻ ഇമാമത്വം നിർവഹിക്കണം. Sahih Muslim👉 “أقرؤهم لكتاب الله."
+            },
+            {
+                category: "prayer",
+                question: "ഒരു സുഫ്ഫിൽ രണ്ടുപേർ മാത്രമാണെങ്കിൽ, ഒരാൾ ഇമാമിന്റെ വലതുവശത്തും മറ്റെയാൾ ഇടതുവശത്തും നിൽക്കുന്നതിൽ പ്രശ്നമുണ്ടോ?", 
+                answer: "രണ്ടുപേർ മാത്രമുള്ളപ്പോൾ, അവർ ഇമാമിന്റെ വലതുവശത്ത് ചേർന്ന് നിൽക്കുന്നതാണ് ശരിയായ രീതി. Ibn ‘Abbas (റ) روایت ചെയ്ത ഹദീസ്: ഒരിക്കൽ ഞാൻ നബി ﷺ യോടൊപ്പം നമസ്കാരം ചെയ്തു. ഞാൻ അവന്റെ ഇടത് വശത്ത് നിന്നു. അപ്പോൾ നബി ﷺ എന്നെ വലത് വശത്തേക്ക് മാറ്റി നിർത്തി."
+            },
+            {
+                category: "prayer",
+                question: "സുഫ്ഫിന്റെ മുൻനിരയിൽ ഒഴിവുണ്ടെങ്കിൽ, പിന്നിലെ നിരയിൽ നിൽക്കാമോ?",
+                answer: "അല്ല, അത് ശരിയല്ല. മുന്നിലെ സുഫ്ഫിൽ വിടവ് ഉണ്ടായിരിക്കെ പിന്നിലെ സുഫ്ഫിൽ നിൽക്കുന്നത് കറാഹത്താണ്. അതിനാൽ ആദ്യം മുന്നിലെ സുഫ്ഫ് പൂർണ്ണമാക്കുന്നതാണ് ശ്രേഷ്ഠം. Sahih Muslim 👉أتموا الصف الأول فالأول"
+            },
+            {
+                category: "prayer",
+                question: "മഷി പുരണ്ട നിലയിൽ വുളൂ ചെയ്താൽ, അത് ശരിയായ വുളൂ ആകുമോ?",
+                answer: "വുളൂയുടെ അവയവങ്ങളിൽ മഷിയുടെ തടി (ചുരണ്ടിയാൽ ഇളകിപ്പോരുന്ന പാളി) നിലനിൽക്കുന്നുണ്ടെങ്കിൽ, അത് വുളുവിനെ ബാധിക്കും. എന്നാൽ മഷിയുടെ വെറും അടയാളം മാത്രമുണ്ടെങ്കിൽ, വുളുവിനെ അത് ബാധിക്കില്ല. Fath al-Mu'in (فتح المعين: 45)"
+            },
+            {
+                category: "Hajj",
+                question: "ഉള്ഹിയ്യത്ത് അറുക്കുമ്പോൾ ഇത് എന്റെ ഉള്ഹിയ്യത്ത് ആണ് നീ സ്വീകരിക്കണേ എന്ന് പറഞ്ഞ് പ്രാർത്ഥിക്കുന്നത് കൊണ്ട് നേർച്ച ബാധകമാകുമോ?",
+                answer: "അറവിന്റെ സമയത്ത് ഇത്തരത്തിൽ പ്രാർത്ഥിച്ചതുകൊണ്ട് മാത്രം ഉള്ഹിയ്യത്ത് നേർച്ചയായി മാറുകയില്ല. (തുഹ്ഫ 9/414)"
+            },
+            {
+                category: "Hajj",
+                question: "ഉള്ഹിയ്യത്ത് നിർബന്ധമാണോ?",
+                answer: "അല്ല, ഉള്ഹിയ്യത്ത് കർമ്മം തിരുനബി ﷺയെ ഒഴികെയുള്ളവർക്കെല്ലാം ശക്തമായ സുന്നത്തായി കണക്കാക്കപ്പെടുന്നു.(തുഹ്ഫ 4/400)"
+            },
+            {
+                category: "prayer",
+                question: "നിസ്കാരത്തിൽ ഫാതിഹക്ക് ഇടയിൽ തുമ്മിയാൽ ഫാതിഹ വീണ്ടും ഓതണമോ?",
+                answer: "വേണം, ഫാതിഹ ഓതുന്നതിൻ്റെ തുടർച്ചക്ക് ഭംഗം സംഭവിക്കുന്നതിനാൽ, ഫാതിഹ ആദ്യം മുതൽ വീണ്ടും ഓതണം."
+            },
+            {
+                category: "prayer",
+                question: "ദീർഘയാത്രക്കാരന് ഖസ്റാക്കി നിസ്കരിക്കലാണോ, പൂർത്തിയാക്കി നിസ്കരിക്കലാണോ ഉത്തമം ?",
+                answer: "മൂന്ന് മർഹല (198 km) യാത്രയുണ്ടെങ്കിൽ, ഖസ്റാക്കി നിസ്കരിക്കലാണ് ഉത്തമം. എന്നാൽ, മൂന്ന് മർഹലയിൽ താഴെയാണ് യാത്രയുള്ളതെങ്കിൽ, പൂർത്തിയാക്കി നിസ്കരിക്കലാണ് ഉത്തമം. (تحفة المحتاج: ٣٩٣/٢)"
+            },
+            {
+                category: "Family",
+                question: "കുഞ്ഞിന് പേര് നൽകുന്നതിൽ മുൻഗണന ആര്‍ക്ക് — മാതാവിനോ പിതാവിനോ?",
+                answer: "പിതാവിനാണ്, പിതാവില്ലെങ്കിൽ കുട്ടിയുടെ പിതാമഹനാണ് അവകാശം. (حاشية الشرواني: ٣٧٣/٩)"
+            },
+            {
+                category: "modern",
+                question: "തിരിച്ചടയ്ക്കാനുള്ള പ്രതീക്ഷയില്ലാതെ കടം വാങ്ങുന്നത് അനുവദനീയമാണോ?",
+                answer: "പ്രസ്തുത കടം വാങ്ങൽ, അനിവാര്യ ഘട്ടത്തിലല്ലാതെ, ഹറാമാകുന്നു. (فتح المعين: ٢٤٩)"
+            },
+            {
+                category: "all",
+                question: "റോഡിൽ കെട്ടിക്കിടക്കുന്ന നജസ് വെള്ളം ശരീരത്തിലേക്കോ വസ്ത്രത്തിലേക്കോ തെറിച്ചാൽ അതിൽ ഇളവുണ്ടോ?",
+                answer: "അത്തരം വെള്ളം ശരീരത്തിലേക്കോ വസ്ത്രത്തിലേക്കോ തെറിക്കുന്നത് ഒഴിവാക്കാൻ സാധാരണ സാഹചര്യങ്ങളിൽ പ്രയാസമുണ്ടെങ്കിൽ, അതിൽ ശർഈ ഇളവ് നൽകപ്പെടുന്നു. (تحفة المحتاج: ٢/١٣٠)"
+            },
+            {
+                category: "prayer",
+                question: "ഭക്ഷണം സന്നിഹിതമായിരിക്കെ, അതിനുള്ള ആഗ്രഹത്തോടെ നമസ്കരിക്കുന്നത് അനുവദനീയമാണോ?",
+                answer: "കറാഹത്താകുന്നു. (تحفة المحتاج: ٢/١٦٤)"
+            },
+         
+            {
+               category: "prayer",
+               question: "ഇമാം ആദ്യ സലാം പറഞ്ഞതിന് പിന്നാലെയോ, രണ്ടാമത്തെ സലാമിന് ശേഷമോ മഅ്മൂം സലാം പറയേണ്ടത്?",
+               answer: "ഇമാം രണ്ട് സലാമുകളും പൂർത്തിയാക്കിയതിന് ശേഷമാണ് മഅ്മൂമിന് സലാം പറയുന്നത് സുന്നത്തായി കണക്കാക്കപ്പെടുന്നത്. فروع: يسن ......وأن يسلم المأموم بعد تسليمتي الإمام. [فتح المعين : ١٢٣]"
+            },
+
+            {
+                category: "modern",
+                question: "ശരീരത്തിൽ സാധാരണയേക്കാൾ അധികമായി ഉണ്ടായിരിക്കുന്ന അവയവങ്ങൾ (ഉദാ: അധിക വിരലുകൾ, മുഴകൾ) ശസ്ത്രക്രിയ വഴി നീക്കം ചെയ്യുന്നതിനെക്കുറിച്ച് ഇസ്ലാമിക കാഴ്ചപ്പാട് എന്താണ്?",
+                answer: "ശരീരത്തിൽ സ്വാഭാവിക ഘടനയിൽ നിന്ന് വ്യത്യസ്തമായി അധികമായി ഉള്ള അവയവങ്ങൾ (ഉദാ: അധിക വിരലുകൾ, മുഴകൾ) ഉള്ള സാഹചര്യങ്ങളിൽ, അവ ശസ്ത്രക്രിയ വഴി നീക്കം ചെയ്യുന്നത് അനുവദനീയമാണ് — പക്ഷേ ഒരു പ്രധാന വ്യവസ്ഥയോടെ: അത് നീക്കം ചെയ്യുന്നതിലൂടെ അപകടം ഉണ്ടാകില്ലെന്ന് വൈദ്യശാസ്ത്ര വിദഗ്ധർ ഉറപ്പുനൽകണം. കാരണം, ഇത്തരം അവയവങ്ങൾ “അധിക മാംസം” (ലഹ്‌ം സാഇദ്) ആയി കണക്കാക്കപ്പെടുന്നു. അവ നീക്കം ചെയ്യുന്നതിലൂടെ ശരീരത്തിലെ രൂപഭംഗി (ദോഷം) മാറുകയും ആരോഗ്യപരമായ ഗുണം ലഭിക്കുകയും ചെയ്യും. ശാഫിഈ മദ്‌ഹബിലെ പ്രമുഖ പണ്ഡിതനായ ഇമാം ഇബ്നു ഹജർ അൽ-ഹൈതമി ഇതിനെ കുറിച്ച് പറയുന്നത്: “അപകടസാധ്യതകൾ സമാനമാണെങ്കിൽ അധിക മാംസം നീക്കം ചെയ്യുന്നത് അനുവദനീയമാണ്; അത് നീക്കം ചെയ്യുന്നതിലൂടെ ദോഷം മാറുകയും ശാന്തി (ശിഫാ) ലഭിക്കുകയും ചെയ്യും.”"
+            },
+            {
+                category: "all",
+                question: "സ്ത്രീകൾ ഖബറുകൾ സന്ദർശിക്കുന്നത് ഇസ്‌ലാമിൽ അനുവദനീയമാണോ, അതിന് വിരോധമുണ്ടോ?",
+                answer: "ഖബറുകൾ സിയാറത്ത് ചെയ്യൽ പുരുഷന്മാർക്ക് മാത്രമാണ് സുന്നത്തുള്ളത്. സ്ത്രീകൾക്ക് കറാഹത്താണ്. എങ്കിലും, അമ്പിയാക്കളുടെയും ഔലിയാക്കളുടെയും പണ്ഡിതന്മാരുടെയും ഖബറുകൾ സിയാറത്ത് ചെയ്യൽ സ്ത്രീകൾക്കും സുന്നത്താകുന്നു. (إعانة الطالبين - 2/161)"
+            },
+            {
+                category: "Fasting",
+                question: "ഒരാളുടെ ഉൾഭാഗത്തേക്ക് ഈച്ച പ്രവേശിച്ചാൽ നോമ്പ് മുറിയുമോ?",
+                answer: "ഈച്ച പ്രവേശിക്കൽ കൊണ്ട് നോമ്പ് മുറിയുകയില്ല; എന്നാൽ അതിനെ പുറത്തെടുക്കുന്നത് കൊണ്ട് നോമ്പ് മുറിയും.(فتح المعين 265)"
+            },
+            {
+                category: "Fasting",
+                question: "നോമ്പ് നോറ്റിരിക്കെ ഒരാൾക്ക് ബോധക്ഷയം സംഭവിച്ചാൽ നോമ്പ് മുറിയുമോ?",
+                answer: "ഇല്ല, നോമ്പ് മുറിയില്ല. (إعانة الطالبين 248/2)"
+            },
+            {
+                category: "Fasting",
+                question: "മാസം കണ്ടെന്ന് ഒരാൾ സാക്ഷ്യം പറഞ്ഞതിനെ അടിസ്ഥാനമാക്കി നോമ്പ് ആരംഭിച്ച ശേഷം, ആ സാക്ഷി തന്റെ മൊഴി പിൻവലിച്ചാൽ എന്ത് ചെയ്യണം?",
+                answer: "നോമ്പ് മുറിക്കാൻ തന്നെ പാടില്ല. (إعانة الطالبين 245/2)"
+            },
+            {
+                category: "Fasting",
+                question: "ദുൽഹിജ്ജ എട്ടിന് നോമ്പനുഷ്ഠിക്കൽ പ്രത്യേകം സുന്നത്തുണ്ടോ?",
+                answer: "ദുൽഹിജ്ജ എട്ട് അറഫ ദിനമാകാൻ സാധ്യതയുള്ളതിനാൽ, സൂക്ഷ്മതക്കുവേണ്ടിയും ദുൽഹിജ്ജ ഒന്ന് മുതൽ പത്ത് വരെയുള്ള പൊതുവായ സുന്നത്ത് നോമ്പും മാനിച്ച്, ദുൽഹിജ്ജ എട്ടിനും നോമ്പ് സുന്നത്താണ്."
+            },
+            {
+                category: "Fasting",
+                question: "മാസം മുഴുവൻ നോമ്പനുഷ്ഠിക്കൽ സുന്നത്തുണ്ടോ?",
+                answer: "റമളാൻ നോമ്പിന് ശേഷം നോമ്പ് അനുഷ്ഠിക്കാൻ ഉത്തമമായത് ഹറാം മാസങ്ങളിലാണ്; അവയിൽ ഏറ്റവും ഉത്തമം മുഹറം മാസമാണ്, അതിൽ ആദ്യ പത്തിൽ നോമ്പ് അനുഷ്ഠിക്കൽ ശക്തമായ സുന്നത്താണ്. (إعانة الطالبين: ٢/٣٠٧)"
+            },
+            { 
+                category: "Zakath",
+                question: "കടലിൽ നിന്ന് മത്സ്യം പിടിച്ച് വിൽക്കുന്ന തൊഴിലാളികൾക്ക് കച്ചവട സകാത്ത് നിർബന്ധമാണോ?",
+                answer: "വില്പന വസ്തുക്കൾ മറ്റൊന്നിന് പകരം ഉടമപ്പെടുത്തിയതായിരിക്കണം എന്നത് കച്ചവട സകാത്ത് നിർബന്ധമാകാനുള്ള ഉപാധിയായതിനാൽ, അവർക്ക് കച്ചവട സകാത്ത് നിർബന്ധമില്ല; എന്നാൽ വില്പന ഉദ്ദേശിച്ച് മറ്റുള്ളവരിൽ നിന്ന് മത്സ്യം വാങ്ങി കച്ചവടം ചെയ്യുന്നവർക്ക് നിയമപ്രകാരം സകാത്ത് കൊടുക്കേണ്ടതാണ്.  (تخفة المحتاج: ٣/٢٩٦)"
+            },
+            { 
+                category: "Ibadah",
+                question: "ഖബ്ർ ചുംബിക്കുന്നതിന്റെ വിധിയെന്ത്?",
+                answer: "അടിസ്ഥാനപരമായി ഖബ്ർ ചുംബിക്കൽ കറാഹത്താകുന്നു. എന്നാൽ മഹാന്മാരുടെ ഖബ്ർ ബർക്കത്ത് എടുക്കാനുള്ള ഉദ്ദേശത്തോടെ ചുംബിക്കുന്നത് കറാഹത്തല്ല. (شرح المنهاج ٣/٣٢٠)"
+            },
+            { 
+                category: "Ibadah",
+                question: "മഖാമുകളിലേക്കുള്ള അമുസ്ലിമീങ്ങളുടെ നേർച്ച ശരിയാകുമോ?",
+                answer: "ശരിയാകില്ലെന്നാണ് പ്രബലമെങ്കിലും, ശരിയാകെന്നും ഒരു അഭിപ്രായമുണ്ട്. (إعانة الطالبين: ٢/٤٠٩)"
+            },
+            { 
+                category: "Hajj",
+                question: "ദുൽഹിജ്ജ എട്ടാം ദിവസത്തിൽ നോമ്പ് നോൽക്കുന്നത് സുന്നത്താണോ",
+                answer: "ദുൽഹിജ്ജ എട്ട് അറഫ ദിനമാകാൻ സാധ്യതയുള്ളതിനാൽ, സൂക്ഷ്മതക്കുവേണ്ടിയും ദുൽഹിജ്ജ ഒന്ന് മുതൽ പത്ത് വരെയുള്ള പൊതുവായ സുന്നത്ത് നോമ്പും മാനിച്ച്, ദുൽഹിജ്ജ എട്ടിനും നോമ്പ് സുന്നത്താണ്. (والأحوط صوم الثامن مع عرفة) (إعانة الطالبين:"
+            },
+            { 
+                category: "Fasting",
+                question: "ദുൽഹിജ്ജ എട്ടാം ദിവസത്തിൽ നോമ്പ് നോൽക്കുന്നത് സുന്നത്താണോ?",
+                answer: "ദുൽഹിജ്ജ എട്ട് അറഫ ദിനമാകാൻ സാധ്യതയുള്ളതിനാൽ, സൂക്ഷ്മതക്കുവേണ്ടിയും ദുൽഹിജ്ജ ഒന്ന് മുതൽ പത്ത് വരെയുള്ള പൊതുവായ സുന്നത്ത് നോമ്പും മാനിച്ച്, ദുൽഹിജ്ജ എട്ടിനും നോമ്പ് സുന്നത്താണ്. (والأحوط صوم الثامن مع عرفة) (إعانة الطالبين:"
+            },
+            { 
+                category: "xfasting",
+                question: "മാസം മുഴുവൻ നോമ്പനുഷ്ഠിക്കൽ സുന്നത്തുണ്ടോ?",
+                answer: "റമളാൻ നോമ്പിന് ശേഷം നോമ്പ് അനുഷ്ഠിക്കാൻ ഉത്തമമായത് ഹറാം മാസങ്ങളിലാണ്; അവയിൽ ഏറ്റവും ഉത്തമം മുഹറം മാസമാണ്, അതിൽ ആദ്യ പത്തിൽ നോമ്പ് അനുഷ്ഠിക്കൽ ശക്തമായ സുന്നത്താണ്. (إعانة الطالبين: ٢/٣٠٧)"
+            },
+            { 
+                category: "Fasting",
+                question: "മാസം മുഴുവൻ നോമ്പനുഷ്ഠിക്കൽ സുന്നത്തുണ്ടോ?",
+                answer: "റമളാൻ നോമ്പിന് ശേഷം നോമ്പ് അനുഷ്ഠിക്കാൻ ഉത്തമമായത് ഹറാം മാസങ്ങളിലാണ്; അവയിൽ ഏറ്റവും ഉത്തമം മുഹറം മാസമാണ്, അതിൽ ആദ്യ പത്തിൽ നോമ്പ് അനുഷ്ഠിക്കൽ ശക്തമായ സുന്നത്താണ്. (إعانة الطالبين: ٢/٣٠٧)"
+            },
+            { 
+                category: "Fasting",
+                question: "മാസം മുഴുവൻ നോമ്പനുഷ്ഠിക്കൽ സുന്നത്തുണ്ടോ?",
+                answer: "റമളാൻ നോമ്പിന് ശേഷം നോമ്പ് അനുഷ്ഠിക്കാൻ ഉത്തമമായത് ഹറാം മാസങ്ങളിലാണ്; അവയിൽ ഏറ്റവും ഉത്തമം മുഹറം മാസമാണ്, അതിൽ ആദ്യ പത്തിൽ നോമ്പ് അനുഷ്ഠിക്കൽ ശക്തമായ സുന്നത്താണ്. (إعانة الطالبين: ٢/٣٠٧)"
+            },
+            { 
+                category: "Fasting",
+                question: "മാസം മുഴുവൻ നോമ്പനുഷ്ഠിക്കൽ സുന്നത്തുണ്ടോ?",
+                answer: "റമളാൻ നോമ്പിന് ശേഷം നോമ്പ് അനുഷ്ഠിക്കാൻ ഉത്തമമായത് ഹറാം മാസങ്ങളിലാണ്; അവയിൽ ഏറ്റവും ഉത്തമം മുഹറം മാസമാണ്, അതിൽ ആദ്യ പത്തിൽ നോമ്പ് അനുഷ്ഠിക്കൽ ശക്തമായ സുന്നത്താണ്. (إعانة الطالبين: ٢/٣٠٧)"
+            },
+            { 
+                category: "Fasting",
+                question: "മാസം മുഴുവൻ നോമ്പനുഷ്ഠിക്കൽ സുന്നത്തുണ്ടോ?",
+                answer: "റമളാൻ നോമ്പിന് ശേഷം നോമ്പ് അനുഷ്ഠിക്കാൻ ഉത്തമമായത് ഹറാം മാസങ്ങളിലാണ്; അവയിൽ ഏറ്റവും ഉത്തമം മുഹറം മാസമാണ്, അതിൽ ആദ്യ പത്തിൽ നോമ്പ് അനുഷ്ഠിക്കൽ ശക്തമായ സുന്നത്താണ്. (إعانة الطالبين: ٢/٣٠٧)"
+            },
+            { 
+                category: "Fasting",
+                question: "മാസം മുഴുവൻ നോമ്പനുഷ്ഠിക്കൽ സുന്നത്തുണ്ടോ?",
+                answer: "റമളാൻ നോമ്പിന് ശേഷം നോമ്പ് അനുഷ്ഠിക്കാൻ ഉത്തമമായത് ഹറാം മാസങ്ങളിലാണ്; അവയിൽ ഏറ്റവും ഉത്തമം മുഹറം മാസമാണ്, അതിൽ ആദ്യ പത്തിൽ നോമ്പ് അനുഷ്ഠിക്കൽ ശക്തമായ സുന്നത്താണ്. (إعانة الطالبين: ٢/٣٠٧)"
+            },
+            { 
+                category: "Fasting",
+                question: "മാസം മുഴുവൻ നോമ്പനുഷ്ഠിക്കൽ സുന്നത്തുണ്ടോ?",
+                answer: "റമളാൻ നോമ്പിന് ശേഷം നോമ്പ് അനുഷ്ഠിക്കാൻ ഉത്തമമായത് ഹറാം മാസങ്ങളിലാണ്; അവയിൽ ഏറ്റവും ഉത്തമം മുഹറം മാസമാണ്, അതിൽ ആദ്യ പത്തിൽ നോമ്പ് അനുഷ്ഠിക്കൽ ശക്തമായ സുന്നത്താണ്. (إعانة الطالبين: ٢/٣٠٧)"
+            },
+            { 
+                category: "Fasting",
+                question: "മാസം മുഴുവൻ നോമ്പനുഷ്ഠിക്കൽ സുന്നത്തുണ്ടോ?",
+                answer: "റമളാൻ നോമ്പിന് ശേഷം നോമ്പ് അനുഷ്ഠിക്കാൻ ഉത്തമമായത് ഹറാം മാസങ്ങളിലാണ്; അവയിൽ ഏറ്റവും ഉത്തമം മുഹറം മാസമാണ്, അതിൽ ആദ്യ പത്തിൽ നോമ്പ് അനുഷ്ഠിക്കൽ ശക്തമായ സുന്നത്താണ്. (إعانة الطالبين: ٢/٣٠٧)"
+            },
+        ];
+
+        let currentSearchQuery = "";
+        let currentCategory = "all";
+
+        // Read category from URL parameter on page load
+        function getUrlCategory() {
+            const params = new URLSearchParams(window.location.search);
+            const categoryParam = params.get('category');
+            console.log('URL Category Parameter:', categoryParam);
+            return categoryParam ? categoryParam.toLowerCase() : 'all';
+        }
+
+        function categoryLabel(category) {
+            const labels = {
+                marriage: "നിക്കാഹ്",
+                prayer: "പ്രാർത്ഥന",
+                fasting: "നോമ്പ്",
+                zakath: "സകാത്ത്",
+                hajj: "ഹജ്ജ്",
+                ibadah: "ഇബാദാഹ്",
+                family: "കുടുംബം",
+                business: "വ്യവസായം",
+                modern: "സമീപകാലം"
+            };
+
+            return labels[category.toLowerCase()] || category;
+        }
+
+function createMasalaCard(masala, index) {
+    return `
+        <article class="masala-card fade-in" data-index="${index}">
+            
+            <div class="masala-category">${categoryLabel(masala.category)}</div>
+
+            <div class="masala-question" tabindex="0" role="button">
+                <div class="masala-question-main">
+                    <span class="masala-label">ചോദ്യം</span>
+                    <div class="masala-question-text">${masala.question}</div>
+                </div>
+                <span class="masala-toggle"><i class="fas fa-chevron-down"></i></span>
+            </div>
+
+            <div class="masala-answer-wrap" id="answer-${index}">
+                
+                <div class="masala-answer">
+                    <span class="masala-label">ഉത്തരം</span>
+                    <div>${Array.isArray(masala.answer) ? masala.answer.join('<br>') : masala.answer}</div>
+
+            </div>
+
+            <div class="masala-actions">
+                <button class="btn-masala" type="button" onclick='copyToClipboard(${JSON.stringify(masala.answer)})'>
+                    പകർത്തുക
+                </button>
+            </div>
+
+        </article>
+    `;
+}
+
+        function filterMasalas(query = currentSearchQuery, category = currentCategory) {
+            let filtered = masalaData;
+
+            // Normalize category to lowercase for consistent comparison
+            const normalizedCategory = category.toLowerCase();
+
+            if (normalizedCategory !== "all") {
+                filtered = filtered.filter((masala) => masala.category.toLowerCase() === normalizedCategory);
+            }
+
+            if (query.trim()) {
+                const lowerQuery = query.toLowerCase();
+                filtered = filtered.filter((masala) => {
+                    const answerText = Array.isArray(masala.answer) 
+                        ? masala.answer.join(' ') 
+                        : masala.answer;
+                    return masala.question.toLowerCase().includes(lowerQuery) ||
+                           answerText.toLowerCase().includes(lowerQuery);
+                });
+            }
+
+            return filtered;
+        }
+
+        function renderMasalaCards() {
+            const grid = document.getElementById("masalaGrid");
+            const noResults = document.getElementById("noResults");
+            const filtered = filterMasalas();
+
+            if (!filtered.length) {
+                grid.innerHTML = "";
+                noResults.style.display = "block";
+                return;
+            }
+
+            grid.innerHTML = filtered.map((masala, index) => createMasalaCard(masala, index)).join("");
+            noResults.style.display = "none";
+        }
+
+        function toggleAnswer(card) {
+            const answerWrap = card.querySelector(".masala-answer-wrap");
+            const trigger = card.querySelector(".masala-question");
+            const isExpanded = card.classList.toggle("expanded");
+
+            trigger.setAttribute("aria-expanded", isExpanded ? "true" : "false");
+            answerWrap.style.maxHeight = isExpanded ? `${answerWrap.scrollHeight}px` : "0px";
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert("ഉത്തരം പകർത്തി! 📋");
+            }).catch(() => {
+                const textArea = document.createElement("textarea");
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand("copy");
+                document.body.removeChild(textArea);
+                alert("ഉത്തരം പകർത്തി! 📋");
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const searchInput = document.getElementById("masalaSearch");
+            const categoryFilter = document.getElementById("categoryFilter");
+
+            // Set category from URL on page load
+            currentCategory = getUrlCategory();
+            categoryFilter.value = currentCategory;
+            console.log('Category filter set to:', currentCategory);
+
+            renderMasalaCards();
+
+            searchInput.addEventListener("input", function () {
+                currentSearchQuery = this.value;
+                renderMasalaCards();
+            });
+
+            categoryFilter.addEventListener("change", function () {
+                currentCategory = this.value;
+                renderMasalaCards();
+            });
+
+            document.addEventListener("click", function (event) {
+                const question = event.target.closest(".masala-question");
+                if (!question) return;
+                toggleAnswer(question.closest(".masala-card"));
+            });
+
+            document.addEventListener("keydown", function (event) {
+                const question = event.target.closest(".masala-question");
+                if (!question) return;
+                if (event.key !== "Enter" && event.key !== " ") return;
+
+                event.preventDefault();
+                toggleAnswer(question.closest(".masala-card"));
+            });
+        });
+
+        // Navbar toggle for mobile
+        const navbarToggle = document.getElementById('navbarToggle');
+        const navbarNav = document.getElementById('navbarNav');
+
+        navbarToggle?.addEventListener('click', () => {
+            navbarNav.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.navbar-nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                navbarNav.classList.remove('active');
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navbarToggle.contains(e.target) && !navbarNav.contains(e.target)) {
+                navbarNav.classList.remove('active');
+            }
+        });
+        
+    </script>
+    <script src="js/ad.js"></script>
+</body>
+</html>
+

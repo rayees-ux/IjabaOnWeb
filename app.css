@@ -1,0 +1,92 @@
+/* 🔥 FULL SCREEN OVERLAY */
+#adOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+/* 💎 BIG MODERN CARD */
+.ad-modern {
+  width: 90%;
+  max-width: 500px; /* 🔥 BIGGER SIZE */
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 25px 70px rgba(0,0,0,0.4);
+  animation: zoomIn 0.4s ease;
+  text-align: center;
+  position: relative;
+}
+
+/* 🖼 IMAGE */
+.ad-modern-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+/* 📄 CONTENT */
+.ad-modern-content {
+  padding: 20px;
+}
+
+.ad-modern-content h2 {
+  margin: 10px 0;
+  font-size: 22px;
+  color: #1b5e20;
+}
+
+.ad-modern-content p {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+/* 🔘 BUTTON */
+.ad-modern-btn {
+  display: inline-block;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #2e7d32, #43a047);
+  color: #fff;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.ad-modern-btn:hover {
+  transform: scale(1.05);
+  background: #1b5e20;
+}
+
+/* ❌ CLOSE BUTTON */
+.ad-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.ad-close:hover {
+  background: red;
+  color: #fff;
+}
+
+/* ✨ ANIMATION */
+@keyframes zoomIn {
+  from { transform: scale(0.7); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}

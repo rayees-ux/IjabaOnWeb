@@ -1,0 +1,637 @@
+.search-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 200;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 1rem;
+        }
+
+        .search-modal.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .search-modal__content {
+            background-color: var(--white);
+            border-radius: var(--border-radius-lg);
+            margin-top: 1rem;
+            padding: 1rem;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+
+        .search-result {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .search-result:hover {
+            background-color: rgba(46, 125, 50, 0.05);
+        }
+
+        .hero-banner {
+            background: #f5f7f6;
+            border-radius: 20px;
+            box-shadow: 0 18px 40px rgba(46, 125, 50, 0.1);
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            gap: 2rem;
+            overflow: hidden;
+        }
+
+        .hero-banner__content {
+            max-width: 100%;
+        }
+
+        .hero-banner__eyebrow {
+            margin: 0 0 1rem;
+            color: #1b5e20;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            font-family: 'Noto Sans Malayalam', sans-serif;
+            font-size: 1rem;
+        }
+
+        .hero-banner__title {
+            margin: 0;
+            font-size: clamp(2.2rem, 4vw, 3.8rem);
+            line-height: 1.02;
+            font-weight: 700;
+            color: #12221d;
+            font-family: 'Noto Sans Malayalam', sans-serif;
+        }
+
+        .hero-banner__text {
+            margin: 1.25rem 0 0;
+            color: #4f5a53;
+            font-size: 1rem;
+            line-height: 1.8;
+            max-width: 42rem;
+            font-family: 'Noto Sans Malayalam', sans-serif;
+        }
+
+        .hero-banner__side {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        .hero-banner__action {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #1b5e20;
+            color: #ffffff;
+            border: none;
+            border-radius: 999px;
+            padding: 1.1rem 2rem;
+            min-width: 220px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            box-shadow: 0 14px 30px rgba(27, 94, 32, 0.16);
+            transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+            font-family: 'Noto Sans Malayalam', sans-serif;
+        }
+
+        .hero-banner__action:hover {
+            transform: scale(1.03);
+            background: #154b18;
+            box-shadow: 0 18px 36px rgba(27, 94, 32, 0.22);
+        }
+
+        .hero-banner__action:focus-visible {
+            outline: 3px solid rgba(27, 94, 32, 0.25);
+            outline-offset: 4px;
+        }
+
+        .featured-section {
+            background: linear-gradient(135deg, rgba(46, 125, 50, 0.05), rgba(168, 214, 110, 0.05));
+            border-radius: var(--border-radius-lg);
+            padding: 1.5rem;
+        }
+
+        .featured-masala {
+            background: #f8f6f2;
+            border-radius: 24px;
+            padding: 1.5rem 1.25rem;
+            box-shadow: 0 18px 40px rgba(17, 54, 32, 0.05);
+            margin-bottom: 1.5rem;
+        }
+
+        .featured-masala__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .featured-masala__label {
+            color: #276749;
+            font-weight: 700;
+            font-size: 0.98rem;
+            letter-spacing: 0.01em;
+            font-family: 'Noto Sans Malayalam', sans-serif;
+        }
+
+        .featured-masala__headline {
+            margin: 0.35rem 0 0;
+            font-size: clamp(1.7rem, 2.4vw, 2.4rem);
+            line-height: 1.08;
+            font-weight: 700;
+            color: #10221b;
+            font-family: 'Noto Sans Malayalam', sans-serif;
+        }
+
+        .carousel__actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .carousel__nav {
+            width: 2.6rem;
+            height: 2.6rem;
+            border: none;
+            border-radius: 999px;
+            background: #ffffff;
+            color: #1b5e20;
+            cursor: pointer;
+            font-size: 1.1rem;
+            box-shadow: 0 8px 20px rgba(17, 54, 32, 0.08);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel__nav:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 14px 26px rgba(17, 54, 32, 0.12);
+            background: #eef7ee;
+        }
+
+        .featured-masala__track {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 0.5rem;
+            padding-inline: 0.5rem;
+            -webkit-overflow-scrolling: touch;
+            touch-action: pan-y;
+            cursor: grab;
+        }
+
+        .featured-masala__track.dragging {
+            cursor: grabbing;
+        }
+
+        .featured-masala__track::-webkit-scrollbar {
+            display: none;
+        }
+
+        .featured-masala__track {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .featured-masala__card {
+            flex: 0 0 min(320px, 84%);
+            min-width: 280px;
+            max-width: 320px;
+            background: #ffffff;
+            border-radius: 20px;
+            border: 1px solid rgba(17, 54, 32, 0.06);
+            box-shadow: 0 18px 40px rgba(17, 54, 32, 0.08);
+            overflow: hidden;
+            scroll-snap-align: start;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .featured-masala__card:hover {
+            transform: translateY(-2px) scale(1.01);
+            box-shadow: 0 24px 48px rgba(17, 54, 32, 0.14);
+        }
+
+        .featured-masala__image {
+            width: 100%;
+            height: 188px;
+            object-fit: cover;
+            display: block;
+            border-bottom: 1px solid #f0f2ef;
+        }
+
+        .featured-masala__body {
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+        }
+
+        .featured-masala__badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.45rem 0.9rem;
+            background: #e4f6e4;
+            color: #1f4d29;
+            font-family: 'Amiri', serif;
+            font-size: 0.98rem;
+            border-radius: 999px;
+            width: max-content;
+        }
+
+        .featured-masala__title {
+            margin: 0;
+            color: #10221b;
+            font-size: 1.08rem;
+            line-height: 1.4;
+            font-weight: 700;
+            font-family: 'Noto Sans Malayalam', sans-serif;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+
+        .featured-masala__excerpt {
+            margin: 0;
+            color: #4d5a53;
+            font-size: 0.96rem;
+            line-height: 1.7;
+            font-family: 'Noto Sans Malayalam', sans-serif;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+
+
+        /* New Navbar Styles */
+        .navbar {
+            width: 100%;
+            max-width: 1200px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 0;
+            
+        }
+
+        .navbar-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1.5rem;
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2e7d32;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .navbar-brand span {
+            color: #1b5e20;
+        }
+
+        .navbar-nav {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 2rem;
+        }
+
+        .navbar-nav li {
+            position: relative;
+        }
+
+        .navbar-nav a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            font-family: 'Inter', sans-serif;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .navbar-nav a:hover {
+            background: rgba(46, 125, 50, 0.1);
+            color: #2e7d32;
+            transform: translateY(-1px);
+        }
+
+        .navbar-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #333;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .navbar-admin {
+            background: #2e7d32;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.3s ease;
+        }
+
+        .navbar-admin:hover {
+            background: #1b5e20;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .navbar-nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                gap: 0;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+                border-radius: 0 0 8px 8px;
+            }
+
+            .navbar-nav.active {
+                display: flex;
+            }
+
+            .navbar-nav li {
+                border-bottom: 1px solid #f0f0f0;
+            }
+
+            .navbar-nav a {
+                padding: 1rem 1.5rem;
+                display: block;
+            }
+
+            .navbar-toggle {
+                display: block;
+            }
+
+            .navbar-container {
+                padding: 1rem;
+            }
+
+            .hero-banner {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding: 1.8rem;
+            }
+
+            .hero-banner__side {
+                justify-content: center;
+                margin-top: 1.25rem;
+            }
+        }
+        /* ASK BUTTON */
+.ask-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 10px 18px;
+  border-radius: 30px;
+
+  background: linear-gradient(135deg, #2e7d32, #43a047);
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+
+  border: none;
+  cursor: pointer;
+
+  box-shadow: 0 4px 12px rgba(46, 125, 50, 0.3);
+  transition: all 0.3s ease;
+}
+
+/* HOVER EFFECT */
+.ask-btn:hover {
+  background: linear-gradient(135deg, #1b5e20, #2e7d32);
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+}
+
+/* CLICK EFFECT */
+.ask-btn:active {
+  transform: scale(0.96);
+}
+
+/* ICON STYLE */
+.ask-btn span {
+  font-size: 16px;
+}
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 25px;
+  background: rgba(255,255,255,0.9);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.logo {
+  font-weight: bold;
+  color: #2e7d32;
+  font-size: 18px;
+}
+
+/* Links */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links li {
+  position: relative;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  padding: 8px 10px;
+  transition: 0.3s;
+}
+
+.nav-links a:hover {
+  color: #2e7d32;
+}
+
+/* Dropdown */
+.dropdown-menu {
+  position: absolute;
+  top: 40px;
+  left: 0;
+
+  background: white;
+  border-radius: 10px;
+  padding: 10px 0;
+  min-width: 160px;
+
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+}
+
+/* Dropdown items */
+.dropdown-menu li {
+  padding: 0;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 10px 15px;
+  color: #333;
+}
+
+.dropdown-menu a:hover {
+  background: #f1f8f4;
+  color: #2e7d32;
+}
+
+/* 🔥 Show on hover (no click needed) */
+.dropdown:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+
+  padding: 1rem 2rem; /* more side space */
+}
+
+/* Logo spacing */
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #2e7d32;
+  text-decoration: none;
+
+  margin-right: 255px; /* 🔥 main gap fix */
+}
+
+/* Nav links */
+.navbar-nav {
+  display: flex;
+  list-style: none;
+  gap: 28px; /* better spacing between items */
+
+  margin: 0;
+  padding: 0;
+}
+
+/* Push Ask button to right */
+.ask-btn {
+  margin-left: auto; /* 🔥 pushes to right */
+}
+
+
+
+
+
+
+
+/* Make responsive navbar */
+        @media (max-width: 960px) {
+            .featured-masala__track {
+                gap: 0.9rem;
+                padding-inline: 0.4rem;
+            }
+
+            .featured-masala__card {
+                min-width: 280px;
+                max-width: 300px;
+            }
+        }
+
+        @media (max-width: 720px) {
+            .featured-masala {
+                padding: 1.2rem 1rem;
+            }
+
+            .featured-masala__header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .featured-masala__headline {
+                font-size: 1.8rem;
+            }
+
+            .carousel__actions {
+                align-self: flex-end;
+            }
+
+            .featured-masala__track {
+                gap: 0.85rem;
+            }
+
+            .featured-masala__card {
+                min-width: 88%;
+                max-width: 88%;
+            }
+
+
+            .navbar-nav{
+                display: none;
+            }
+
+            .navbar-nav.active{
+                display: block;
+            }
+
+            .navbar-toggle {
+                display: block;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .featured-masala__badge {
+                font-size: 0.88rem;
+                padding: 0.4rem 0.75rem;
+            }
+        }

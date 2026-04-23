@@ -1,0 +1,3080 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masala - Islamic Daily</title>
+    <link href="img/favicon.ico" rel="icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="css/app.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        /* New Navbar Styles */
+       
+       :root {
+            --parenting-bg: #f8f6f2;
+            --parenting-surface: #fffdf8;
+            --parenting-primary: #2e7d32;
+            --parenting-primary-dark: #1f5b25;
+            --parenting-accent: #dfeecf;
+            --parenting-gold: #c89f3d;
+            --parenting-text: #223127;
+            --parenting-muted: #647166;
+            --parenting-shadow: 0 18px 40px rgba(46, 125, 50, 0.10);
+            --parenting-radius: 16px;
+        }
+
+        body {
+            background:
+                radial-gradient(circle at top left, rgba(223, 238, 207, 0.7), transparent 32%),
+                radial-gradient(circle at top right, rgba(200, 159, 61, 0.10), transparent 22%),
+                var(--parenting-bg);
+        }
+
+        .parenting-page {
+            padding: 72px 0 96px;
+        }
+
+        .parenting-shell {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .parenting-hero {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 36px;
+            padding: 56px 28px 34px;
+            text-align: center;
+            border-radius: 30px;
+            background:
+                linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(246, 251, 241, 0.98)),
+                var(--parenting-surface);
+            box-shadow: var(--parenting-shadow);
+        }
+
+        .parenting-hero::before,
+        .parenting-hero::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .parenting-hero::before {
+            width: 210px;
+            height: 210px;
+            top: -90px;
+            left: -50px;
+            background: rgba(223, 238, 207, 0.8);
+        }
+
+        .parenting-hero::after {
+            width: 180px;
+            height: 180px;
+            right: -50px;
+            bottom: -80px;
+            background: rgba(200, 159, 61, 0.10);
+        }
+
+        .parenting-badge {
+            position: relative;
+            z-index: 1;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 18px;
+            margin-bottom: 18px;
+            border-radius: 999px;
+            background: rgba(46, 125, 50, 0.08);
+            color: var(--parenting-primary);
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+        }
+
+        .parenting-title {
+            position: relative;
+            z-index: 1;
+            margin: 0;
+            font-family: "Manjari", "Noto Sans Malayalam", sans-serif;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            line-height: 1.25;
+            font-weight: 700;
+            color: var(--parenting-text);
+        }
+
+        .parenting-subtitle {
+            position: relative;
+            z-index: 1;
+            max-width: 780px;
+            margin: 18px auto 0;
+            color: var(--parenting-muted);
+            font-family: "Manjari", "Noto Sans Malayalam", sans-serif;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .parenting-panel-wrap {
+            background: rgba(255, 253, 248, 0.9);
+            border-radius: 28px;
+            padding: 24px;
+            box-shadow: var(--parenting-shadow);
+            backdrop-filter: blur(6px);
+        }
+
+        .parenting-tabs {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            width: 100%;
+            margin-bottom: 28px;
+            padding: 10px;
+            border-radius: 22px;
+            background: rgba(46, 125, 50, 0.06);
+        }
+
+        .parenting-tab {
+            flex: 1 1 280px;
+            border: 0;
+            border-radius: 16px;
+            padding: 16px 18px;
+            background: transparent;
+            color: var(--parenting-primary-dark);
+            font-family: "Manjari", "Noto Sans Malayalam", sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            text-align: center;
+            transition: transform 0.25s ease, background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .parenting-tab:hover,
+        .parenting-tab:focus {
+            outline: none;
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.7);
+        }
+
+        .parenting-tab.active {
+            background: linear-gradient(135deg, var(--parenting-primary), #3f9b45);
+            color: #ffffff;
+            box-shadow: 0 12px 24px rgba(46, 125, 50, 0.22);
+        }
+
+        .tab-panel {
+            display: none;
+            opacity: 0;
+            transform: translateY(14px);
+        }
+
+        .tab-panel.active {
+            display: block;
+            animation: parentingFade 0.45s ease forwards;
+        }
+
+        @keyframes parentingFade {
+            from {
+                opacity: 0;
+                transform: translateY(14px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-intro {
+            margin-bottom: 28px;
+            padding: 22px 24px;
+            border-radius: var(--parenting-radius);
+            background: linear-gradient(135deg, rgba(223, 238, 207, 0.55), rgba(255, 255, 255, 0.92));
+            color: var(--parenting-text);
+        }
+
+        .section-intro h2 {
+            margin-bottom: 12px;
+            font-family: "Manjari", "Noto Sans Malayalam", sans-serif;
+            font-size: 1.55rem;
+            font-weight: 700;
+        }
+
+        .section-intro p {
+            margin: 0;
+            color: var(--parenting-muted);
+            font-family: "Manjari", "Noto Sans Malayalam", sans-serif;
+            line-height: 1.8;
+        }
+
+        .parenting-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .parenting-card {
+            height: 100%;
+            padding: 24px;
+            border: 1px solid rgba(46, 125, 50, 0.08);
+            border-radius: var(--parenting-radius);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(247, 252, 244, 0.98));
+            box-shadow: 0 12px 26px rgba(34, 49, 39, 0.07);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .parenting-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(46, 125, 50, 0.18);
+            box-shadow: 0 22px 36px rgba(34, 49, 39, 0.12);
+        }
+
+        .parenting-card.soft-tone {
+            background: linear-gradient(180deg, #fffdfd, #f7fbff);
+        }
+
+        .card-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .age-pill,
+        .ayah-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            border-radius: 999px;
+            font-size: 0.86rem;
+            font-weight: 700;
+        }
+
+        .age-pill {
+            background: rgba(46, 125, 50, 0.10);
+            color: var(--parenting-primary-dark);
+        }
+
+        .ayah-chip {
+            background: rgba(200, 159, 61, 0.14);
+            color: #8a6516;
+        }
+
+        .parenting-card h3 {
+            margin-bottom: 10px;
+            font-family: "Manjari", "Noto Sans Malayalam", sans-serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--parenting-text);
+        }
+
+        .focus-line {
+            display: inline-block;
+            margin-bottom: 14px;
+            color: var(--parenting-primary);
+            font-weight: 700;
+            letter-spacing: 0.01em;
+        }
+
+        .parenting-card p,
+        .parenting-card li {
+            font-family: "Manjari", "Noto Sans Malayalam", sans-serif;
+            color: var(--parenting-muted);
+            line-height: 1.75;
+        }
+
+        .quran-text {
+            margin: 14px 0 16px;
+            padding-left: 14px;
+            border-left: 3px solid rgba(200, 159, 61, 0.65);
+            color: #61705c;
+            font-style: italic;
+        }
+
+        .responsibility-list {
+            padding-left: 18px;
+            margin: 0 0 18px;
+        }
+
+        .tip-box,
+        .duty-box {
+            padding: 16px 18px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, rgba(223, 238, 207, 0.82), rgba(255, 250, 238, 0.96));
+            border: 1px solid rgba(46, 125, 50, 0.08);
+        }
+
+        .tip-box strong,
+        .duty-box strong {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--parenting-primary-dark);
+            font-family: "Manjari", "Noto Sans Malayalam", sans-serif;
+            font-size: 0.96rem;
+        }
+
+        .parenting-summary {
+            margin-top: 30px;
+            padding: 24px;
+            border-radius: var(--parenting-radius);
+            background: #ffffff;
+            box-shadow: 0 16px 28px rgba(34, 49, 39, 0.08);
+        }
+
+        .parenting-summary h3 {
+            margin-bottom: 18px;
+            font-family: "Manjari", "Noto Sans Malayalam", sans-serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--parenting-text);
+        }
+
+        .summary-table-wrap {
+            overflow-x: auto;
+        }
+
+        .summary-table {
+            width: 100%;
+            min-width: 680px;
+            border-collapse: separate;
+            border-spacing: 0;
+            overflow: hidden;
+            border-radius: 14px;
+        }
+
+        .summary-table th,
+        .summary-table td {
+            padding: 16px 18px;
+            text-align: left;
+            border-bottom: 1px solid rgba(46, 125, 50, 0.08);
+            font-family: "Manjari", "Noto Sans Malayalam", sans-serif;
+        }
+
+        .summary-table th {
+            background: rgba(46, 125, 50, 0.10);
+            color: var(--parenting-primary-dark);
+            font-weight: 700;
+        }
+
+        .summary-table tr:last-child td {
+            border-bottom: 0;
+        }
+
+        .summary-table td {
+            color: var(--parenting-muted);
+            background: #fff;
+        }
+
+        .topic-icon {
+            width: 46px;
+            height: 46px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 14px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, rgba(46, 125, 50, 0.14), rgba(223, 238, 207, 0.8));
+            color: var(--parenting-primary);
+            font-size: 1.15rem;
+        }
+
+        .quran-card .ayah-highlight {
+            display: inline-block;
+            margin: 14px 0 16px;
+            padding: 8px 12px;
+            border-radius: 10px;
+            background: rgba(200, 159, 61, 0.12);
+            color: #8a6516;
+            font-weight: 700;
+            font-style: italic;
+        }
+
+        .section-anchor-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 16px;
+            margin-top: 30px;
+        }
+
+        .anchor-card {
+            display: block;
+            padding: 18px 20px;
+            border-radius: 16px;
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.85);
+            color: var(--parenting-primary-dark);
+            box-shadow: 0 10px 24px rgba(34, 49, 39, 0.07);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .anchor-card:hover {
+            text-decoration: none;
+            color: var(--parenting-primary-dark);
+            transform: translateY(-5px);
+            box-shadow: 0 16px 30px rgba(34, 49, 39, 0.10);
+        }
+
+        .anchor-card strong {
+            display: block;
+            margin-bottom: 6px;
+            font-family: "Manjari", "Noto Sans Malayalam", sans-serif;
+            font-size: 1rem;
+        }
+
+        .anchor-card span {
+            color: var(--parenting-muted);
+            font-family: "Manjari", "Noto Sans Malayalam", sans-serif;
+            font-size: 0.92rem;
+        }
+
+        .family-section {
+            position: relative;
+            margin-top: 34px;
+            padding: 34px 28px;
+            border-radius: 28px;
+            background:
+                radial-gradient(circle at top right, rgba(223, 238, 207, 0.48), transparent 26%),
+                linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(247, 251, 243, 0.96));
+            box-shadow: 0 20px 42px rgba(34, 49, 39, 0.09);
+            overflow: hidden;
+        }
+
+        .family-section::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            border: 1px solid rgba(46, 125, 50, 0.08);
+            pointer-events: none;
+        }
+
+        .family-header {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .family-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 18px;
+            margin-bottom: 16px;
+            border-radius: 999px;
+            background: rgba(46, 125, 50, 0.09);
+            color: var(--parenting-primary);
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+        }
+
+        .family-title {
+            margin: 0;
+            font-family: "Manjari", "Noto Sans Malayalam", sans-serif;
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 700;
+            color: var(--parenting-text);
+            line-height: 1.25;
+        }
+
+        .family-subtitle {
+            max-width: 760px;
+            margin: 16px auto 0;
+            color: var(--parenting-muted);
+            font-family: "Manjari", "Noto Sans Malayalam", sans-serif;
+            font-size: 1.04rem;
+            line-height: 1.8;
+        }
+
+        .family-section-block {
+            position: relative;
+            z-index: 1;
+            margin-top: 26px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(46, 125, 50, 0.10);
+        }
+
+        .family-section-block:first-of-type {
+            margin-top: 0;
+            padding-top: 0;
+            border-top: 0;
+        }
+
+        .family-section-heading {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 18px;
+        }
+
+        .family-section-heading h3 {
+            margin: 0;
+            font-family: "Manjari", "Noto Sans Malayalam", sans-serif;
+            font-size: 1.45rem;
+            font-weight: 700;
+            color: var(--parenting-text);
+        }
+
+        .family-section-icon {
+            width: 52px;
+            height: 52px;
+            flex: 0 0 52px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(46, 125, 50, 0.14), rgba(223, 238, 207, 0.88));
+            color: var(--parenting-primary);
+            font-size: 1.2rem;
+            box-shadow: 0 10px 24px rgba(46, 125, 50, 0.12);
+        }
+
+        .family-grid,
+        .family-mini-grid,
+        .family-values-grid,
+        .family-problems-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .family-mini-grid {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        .family-values-grid {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .family-card,
+        .family-mini-card,
+        .family-value-card,
+        .family-highlight-card,
+        .family-summary-box {
+            height: 100%;
+            padding: 24px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.96);
+            border: 1px solid rgba(46, 125, 50, 0.08);
+            box-shadow: 0 14px 28px rgba(34, 49, 39, 0.07);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .family-card:hover,
+        .family-mini-card:hover,
+        .family-value-card:hover,
+        .family-highlight-card:hover,
+        .family-summary-box:hover {
+            transform: translateY(-8px);
+            border-color: rgba(46, 125, 50, 0.16);
+            box-shadow: 0 22px 38px rgba(34, 49, 39, 0.11);
+        }
+
+        .family-highlight-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(247, 252, 244, 0.98));
+        }
+
+        .family-warning-card {
+            background: linear-gradient(145deg, rgba(255, 253, 252, 0.98), rgba(255, 245, 243, 0.98));
+            border: 1px solid rgba(196, 86, 66, 0.24);
+            box-shadow: 0 18px 32px rgba(153, 64, 49, 0.08);
+        }
+
+        .family-warning-card:hover {
+            border-color: rgba(196, 86, 66, 0.34);
+            box-shadow: 0 22px 38px rgba(153, 64, 49, 0.12);
+        }
+
+        .family-card-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 14px;
+        }
+
+        .family-card-title {
+            margin: 0;
+            font-family: "Manjari", "Noto Sans Malayalam", sans-serif;
+            font-size: 1.22rem;
+            font-weight: 700;
+            color: var(--parenting-text);
+            line-height: 1.45;
+        }
+
+        .family-card-icon {
+            width: 48px;
+            height: 48px;
+            flex: 0 0 48px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 14px;
+            background: linear-gradient(135deg, rgba(46, 125, 50, 0.12), rgba(200, 159, 61, 0.18));
+            color: var(--parenting-primary);
+            font-size: 1.12rem;
+        }
+
+        .family-card p,
+        .family-card li,
+        .family-mini-card p,
+        .family-mini-card li,
+        .family-value-card p,
+        .family-summary-box li,
+        .family-toggle-panel p,
+        .family-toggle-panel li {
+            margin-bottom: 0;
+            font-family: "Manjari", "Noto Sans Malayalam", sans-serif;
+            color: var(--parenting-muted);
+            line-height: 1.8;
+        }
+
+        .family-ayah {
+            display: block;
+            margin: 14px 0 16px;
+            padding: 14px 16px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, rgba(200, 159, 61, 0.12), rgba(223, 238, 207, 0.46));
+            color: #7c5c13;
+            font-style: italic;
+            font-weight: 700;
+            line-height: 1.75;
+        }
+
+        .family-points {
+            margin: 16px 0 0;
+            padding-left: 18px;
+        }
+
+        .family-points li,
+        .family-summary-list li {
+            margin-bottom: 10px;
+        }
+
+        .family-points li:last-child,
+        .family-summary-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .family-keypoint {
+            margin-top: 16px;
+            padding: 14px 16px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, rgba(223, 238, 207, 0.82), rgba(255, 251, 241, 0.96));
+            border: 1px solid rgba(46, 125, 50, 0.08);
+            color: var(--parenting-primary-dark);
+            font-family: "Manjari", "Noto Sans Malayalam", sans-serif;
+            font-weight: 700;
+            line-height: 1.7;
+        }
+
+        .family-value-card {
+            text-align: center;
+            padding: 22px 18px;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(250, 252, 246, 0.95));
+        }
+
+        .family-value-card .family-card-icon {
+            margin: 0 auto 14px;
+        }
+
+        .family-mini-card {
+            padding: 20px;
+        }
+
+        .family-mini-card h4,
+        .family-value-card h4,
+        .family-summary-box h3 {
+            margin: 0 0 10px;
+            font-family: "Manjari", "Noto Sans Malayalam", sans-serif;
+            font-weight: 700;
+            color: var(--parenting-text);
+        }
+
+        .family-summary-box {
+            margin-top: 10px;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(246, 251, 241, 0.98));
+        }
+
+        .family-summary-list {
+            margin: 0;
+            padding-left: 18px;
+        }
+
+        .family-toggle {
+            margin-top: 18px;
+        }
+
+        .family-toggle-button {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 14px 16px;
+            border: 0;
+            border-radius: 14px;
+            background: rgba(46, 125, 50, 0.08);
+            color: var(--parenting-primary-dark);
+            font-family: "Manjari", "Noto Sans Malayalam", sans-serif;
+            font-weight: 700;
+            text-align: left;
+            transition: background-color 0.25s ease, transform 0.25s ease;
+        }
+
+        .family-toggle-button:hover,
+        .family-toggle-button:focus {
+            outline: none;
+            background: rgba(46, 125, 50, 0.12);
+            transform: translateY(-2px);
+        }
+
+        .family-toggle-button i {
+            transition: transform 0.25s ease;
+        }
+
+        .family-toggle-button[aria-expanded="true"] i {
+            transform: rotate(180deg);
+        }
+
+        .family-toggle-panel {
+            display: none;
+            margin-top: 14px;
+            padding: 16px 18px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid rgba(46, 125, 50, 0.08);
+        }
+
+        .family-toggle-panel.is-open {
+            display: block;
+            animation: parentingFade 0.35s ease forwards;
+        }
+
+        .men-section {
+            margin-top: 40px;
+        }
+
+        .men-hero {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 28px;
+            padding: 48px 28px 30px;
+            text-align: center;
+            border-radius: 28px;
+            background:
+                linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(246, 250, 240, 0.98)),
+                var(--parenting-surface);
+            box-shadow: var(--parenting-shadow);
+        }
+
+        .men-hero::before,
+        .men-hero::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .men-hero::before {
+            width: 220px;
+            height: 220px;
+            top: -110px;
+            right: -80px;
+            background: rgba(223, 238, 207, 0.72);
+        }
+
+        .men-hero::after {
+            width: 180px;
+            height: 180px;
+            bottom: -90px;
+            left: -50px;
+            background: rgba(200, 159, 61, 0.12);
+        }
+
+        .men-search {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding: 16px 18px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.88);
+            box-shadow: 0 12px 24px rgba(34, 49, 39, 0.06);
+        }
+
+        .men-search i {
+            color: var(--parenting-primary);
+            font-size: 1rem;
+        }
+
+        .women-section {
+            margin-top: 40px;
+        }
+
+        .women-hero {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 28px;
+            padding: 48px 28px 30px;
+            text-align: center;
+            border-radius: 28px;
+            background:
+                linear-gradient(135deg, rgba(255, 255, 255, 0.97), rgba(255, 248, 243, 0.98)),
+                var(--parenting-surface);
+            box-shadow: var(--parenting-shadow);
+        }
+
+        .women-hero::before,
+        .women-hero::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .women-hero::before {
+            width: 210px;
+            height: 210px;
+            top: -100px;
+            left: -60px;
+            background: rgba(255, 225, 210, 0.6);
+        }
+
+        .women-hero::after {
+            width: 190px;
+            height: 190px;
+            right: -60px;
+            bottom: -90px;
+            background: rgba(223, 238, 207, 0.55);
+        }
+
+        .issue-search {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding: 16px 18px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.88);
+            box-shadow: 0 12px 24px rgba(34, 49, 39, 0.06);
+        }
+
+        .issue-search i {
+            color: var(--parenting-primary);
+            font-size: 1rem;
+        }
+
+        .issue-search input {
+            width: 100%;
+            border: 0;
+            background: transparent;
+            outline: none;
+            color: var(--parenting-text);
+            font-family: "Manjari", "Noto Sans Malayalam", sans-serif;
+            font-size: 1rem;
+        }
+
+        .issue-search input::placeholder {
+            color: #8a9488;
+        }
+
+        .men-search input {
+            width: 100%;
+            border: 0;
+            background: transparent;
+            outline: none;
+            color: var(--parenting-text);
+            font-family: "Manjari", "Noto Sans Malayalam", sans-serif;
+            font-size: 1rem;
+        }
+
+        .men-search input::placeholder {
+            color: #8a9488;
+        }
+
+        .issue-card-title {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .issue-card-title h3 {
+            margin: 0;
+        }
+
+        .issue-text {
+            margin-bottom: 14px;
+        }
+
+        .solution-list {
+            padding-left: 18px;
+            margin: 0;
+        }
+
+        .solution-list li {
+            margin-bottom: 8px;
+        }
+
+        .solution-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .men-summary-list {
+            margin: 0;
+            padding-left: 18px;
+        }
+
+        .men-summary-list li {
+            margin-bottom: 10px;
+            font-family: "Manjari", "Noto Sans Malayalam", sans-serif;
+            color: var(--parenting-muted);
+            line-height: 1.8;
+        }
+
+        .men-summary-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .search-empty {
+            display: none;
+            margin-top: 18px;
+            padding: 18px 20px;
+            border-radius: 16px;
+            background: rgba(255, 250, 238, 0.92);
+            color: #8a6516;
+            font-family: "Manjari", "Noto Sans Malayalam", sans-serif;
+            font-weight: 700;
+            box-shadow: 0 12px 22px rgba(34, 49, 39, 0.05);
+        }
+
+        .search-empty.visible {
+            display: block;
+        }
+
+        .fade-reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.65s ease, transform 0.65s ease;
+        }
+
+        .fade-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 991.98px) {
+            .parenting-grid,
+            .section-anchor-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .family-grid,
+            .family-problems-grid,
+            .family-values-grid,
+            .family-mini-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .parenting-page {
+                padding-top: 48px;
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .parenting-shell {
+                padding: 0 14px;
+            }
+
+            .parenting-hero {
+                padding: 42px 18px 28px;
+                border-radius: 24px;
+            }
+
+            .parenting-panel-wrap {
+                padding: 16px;
+                border-radius: 22px;
+            }
+
+            .parenting-grid,
+            .section-anchor-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .family-grid,
+            .family-problems-grid,
+            .family-values-grid,
+            .family-mini-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .parenting-tab {
+                flex-basis: 100%;
+                font-size: 0.95rem;
+            }
+
+            .parenting-card,
+            .parenting-summary,
+            .section-intro {
+                padding: 20px 18px;
+            }
+
+            .men-hero {
+                padding: 40px 18px 26px;
+                border-radius: 24px;
+            }
+
+            .men-search {
+                padding: 14px 16px;
+            }
+
+            .women-hero {
+                padding: 40px 18px 26px;
+                border-radius: 24px;
+            }
+
+            .issue-search {
+                padding: 14px 16px;
+            }
+
+            .family-section {
+                padding: 26px 18px;
+                border-radius: 24px;
+            }
+
+            .family-card,
+            .family-mini-card,
+            .family-value-card,
+            .family-highlight-card,
+            .family-summary-box {
+                padding: 20px 18px;
+            }
+        }
+        /* IMPORT FONTS (optional but recommended) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+/* ROOT COLORS */
+:root {
+  --primary: #2e7d32;
+  --primary-dark: #1b5e20;
+  --light-bg: #f5f7f6;
+  --card-bg: #ffffff;
+  --border: #e0e0e0;
+}
+
+/* CATEGORY BAR CONTAINER */
+.stle {
+  display: flex;
+  justify-content: flex-start; /* LEFT ALIGN */
+  align-items: center;
+  gap: 12px;
+
+  width: 100%;
+  padding: 12px 25px;
+
+  background: linear-gradient(90deg, #eef7f1, #f9fbfa);
+  border-bottom: 1px solid var(--border);
+
+  font-family: 'Poppins', sans-serif;
+
+  position: relative;
+  z-index: 10;
+
+  /* smooth scroll */
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+
+/* HIDE SCROLLBAR */
+.stle::-webkit-scrollbar {
+  display: none;
+}
+
+/* CATEGORY LINKS */
+.stle .dropdown-item {
+  text-decoration: none;
+  color: var(--primary);
+  font-size: 14px;
+  font-weight: 500;
+
+  padding: 8px 16px;
+  border-radius: 25px;
+
+  background: rgba(46, 125, 50, 0.08);
+
+  transition: all 0.3s ease;
+
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ICON STYLE */
+.stle .dropdown-item span {
+  font-size: 16px;
+}
+
+/* HOVER EFFECT */
+.stle .dropdown-item:hover {
+  background: var(--primary);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(0,0,0,0.1);
+}
+
+/* ACTIVE LINK */
+.stle .dropdown-item.active {
+  background: var(--primary-dark);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+/* CLICK EFFECT */
+.stle .dropdown-item:active {
+  transform: scale(0.95);
+}
+
+/* OPTIONAL: GRADIENT FADE ON RIGHT (nice effect) */
+.stle::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 40px;
+  background: linear-gradient(to right, transparent, #f9fbfa);
+  pointer-events: none;
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 768px) {
+  .stle {
+    padding: 10px 15px;
+    gap: 10px;
+  }
+
+  .stle .dropdown-item {
+    font-size: 13px;
+    padding: 7px 14px;
+  }
+}
+
+/* EXTRA SMALL DEVICES */
+@media (max-width: 480px) {
+  .stle {
+    gap: 8px;
+  }
+
+  .stle .dropdown-item {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+}
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 0;
+        }
+
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1.5rem;
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2e7d32;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .navbar-brand span {
+            color: #1b5e20;
+        }
+
+        .home-link {
+            text-decoration: none;
+            color: #2e7d32;
+            font-weight: 500;
+            font-family: 'Inter', sans-serif;
+            padding: 0.5rem 0.75rem;
+            border-radius: 8px;
+            transition: background 0.25s ease, color 0.25s ease;
+            display: inline-block;
+            white-space: nowrap;
+        }
+
+        .home-link:hover {
+            background: rgba(46, 125, 50, 0.1);
+            color: #1b5e20;
+        }
+
+        .navbar-nav {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 2rem;
+        }
+
+        .navbar-nav li {
+            position: relative;
+        }
+
+        .navbar-nav a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            font-family: 'Inter', sans-serif;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .navbar-nav a:hover, .navbar-nav a.active {
+            background: rgba(46, 125, 50, 0.1);
+            color: #2e7d32;
+            transform: translateY(-1px);
+        }
+
+        .navbar-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #333;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .navbar-admin {
+            background: #2e7d32;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.3s ease;
+        }
+
+        .navbar-admin:hover {
+            background: #1b5e20;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .navbar-nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                gap: 0;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+                border-radius: 0 0 8px 8px;
+            }
+
+            .navbar-nav.active {
+                display: flex;
+            }
+
+            .navbar-nav li {
+                border-bottom: 1px solid #f0f0f0;
+            }
+
+            .navbar-nav a {
+                padding: 1rem 1.5rem;
+                display: block;
+            }
+
+            .navbar-toggle {
+                display: block;
+            }
+
+            .navbar-container {
+                padding: 1rem;
+            }
+        }
+
+        .masala-container {
+            padding: 1rem;
+        }
+
+        .masala-item {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .masala-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+
+        .masala-header {
+            background: linear-gradient(135deg, #2e7d32, #1b5e20);
+            color: white;
+            padding: 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .masala-question {
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+        }
+
+        .masala-category {
+            background: rgba(255,255,255,0.2);
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .masala-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .masala-item.active .masala-icon {
+            transform: rotate(180deg);
+        }
+
+        .masala-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: #f9f9f9;
+        }
+
+        .masala-item.active .masala-content {
+            max-height: 500px;
+        }
+
+        .masala-answer {
+            padding: 1rem;
+            color: #333;
+            line-height: 1.6;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+        }
+
+        .error {
+            text-align: center;
+            padding: 2rem;
+            color: #c62828;
+            background: #ffebee;
+            border-radius: 8px;
+            margin: 1rem;
+        }
+        /* ROOT COLORS */
+:root {
+  --primary: #2e7d32;
+  --primary-dark: #1b5e20;
+  --light-bg: #f5f7f6;
+  --card-bg: #ffffff;
+  --border: #e0e0e0;
+}
+
+/* CATEGORY BAR CONTAINER */
+.stle {
+  display: flex;
+  justify-content: flex-start; /* LEFT ALIGN */
+  align-items: center;
+  gap: 12px;
+
+  width: 100%;
+  padding: 12px 25px;
+
+  background: linear-gradient(90deg, #eef7f1, #f9fbfa);
+  border-bottom: 1px solid var(--border);
+
+  font-family: 'Poppins', sans-serif;
+
+  position: relative;
+  z-index: 10;
+
+  /* smooth scroll */
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+
+/* HIDE SCROLLBAR */
+.stle::-webkit-scrollbar {
+  display: none;
+}
+
+/* CATEGORY LINKS */
+.stle .dropdown-item {
+  text-decoration: none;
+  color: var(--primary);
+  font-size: 14px;
+  font-weight: 500;
+
+  padding: 8px 16px;
+  border-radius: 25px;
+
+  background: rgba(46, 125, 50, 0.08);
+
+  transition: all 0.3s ease;
+
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ICON STYLE */
+.stle .dropdown-item span {
+  font-size: 16px;
+}
+
+/* HOVER EFFECT */
+.stle .dropdown-item:hover {
+  background: var(--primary);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(0,0,0,0.1);
+}
+
+/* ACTIVE LINK */
+.stle .dropdown-item.active {
+  background: var(--primary-dark);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+/* CLICK EFFECT */
+.stle .dropdown-item:active {
+  transform: scale(0.95);
+}
+
+/* OPTIONAL: GRADIENT FADE ON RIGHT (nice effect) */
+.stle::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 40px;
+  background: linear-gradient(to right, transparent, #f9fbfa);
+  pointer-events: none;
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 768px) {
+  .stle {
+    padding: 10px 15px;
+    gap: 10px;
+  }
+
+  .stle .dropdown-item {
+    font-size: 13px;
+    padding: 7px 14px;
+  }
+}
+
+/* EXTRA SMALL DEVICES */
+@media (max-width: 480px) {
+  .stle {
+    gap: 8px;
+  }
+
+  .stle .dropdown-item {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+}
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            
+            <a href="index-new.html" class="navbar-brand"> 
+                Islamic<span>Daily</span>
+            </a>
+            <ul class="navbar-nav" id="navbarNav">
+                <li><a href="masala-new.html" class="active">Mas'ala</a></li>
+                <li><a href="family-new.html">Family</a></li>
+                <li><a href="artcle.html">Article</a></li>
+                <li><a href="contact-new.html">Contact</a></li>
+                <li><a href="profile-new.html">Profile</a></li>
+            </ul>
+            <button class="navbar-toggle" id="navbarToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <body>
+    <!-- TOP NAVIGATION -->
+    
+    
+ <main>
+            <section>
+                
+                <div class="stle">
+                            <a href="fam-new.html#family" class="dropdown-item">🏡 Family</a>
+                            <a href="fam-new.html#parenting" class="dropdown-item">Parenting</a>
+                            <a href="fam-new.html#women" class="dropdown-item">Women Issues</a>
+                            <a href="fam-new.html#men" class="dropdown-item">Men Issues</a>
+                </div>
+                <!-- TAB 1: FAMILY -->
+                <div class="tab-content active" style="padding: 1rem;">
+                    <h2 class="section__title">🏡 ഇസ്ലാമിലെ കുടുംബം</h2>
+                    
+                    <div class="highlight-box highlight-box--info">
+                        <span class="highlight-box__icon">❤️</span>
+                        <div class="highlight-box__content">
+                            <div class="highlight-box__title">സമൂഹത്തിന്റെ അടിസ്ഥാനം</div>
+                            <div class="highlight-box__text">കുടുംബമാണ് ഇസ്ലാമിക് സമൂഹത്തിന്റെ അടിസ്ഥാനം. ശക്തമായ കുടുംബങ്ങൾ ശക്തമായ സമൂഹങ്ങൾ സൃഷ്ടിക്കുന്നു.</div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span>ഭർത്താവ്-ഭാര്യമാരുടെ അവകാശങ്ങൾ</span>
+                            <span class="accordion-icon">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <p class="accordion-text"><strong>ഭർത്താവിന്റെ അവകാശങ്ങൾ:</strong> അനുസരണം, വീടിന്റെ പരിചരണം, ദയ, മാനം</p>
+                            <p class="accordion-text"><strong>ഭാര്യയുടെ അവകാശങ്ങൾ:</strong> ദയയോടുള്ള പെരുമാറ്റം, ഉപജീവനം, മാനം, അവകാശം, അവകാശം</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span>വിവാഹ കരാർ</span>
+                            <span class="accordion-icon">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <p class="accordion-text">ഇസ്ലാമിലെ വിവാഹം പരസ്പര സമ്മതത്തെ അടിസ്ഥാനമാക്കിയുള്ള ഒരു ഗൗരവമായ കരാർ, പ്രണയവും കരുണയും. ഇത് ശരിയായ സാക്ഷികളും രണ്ട് കക്ഷികളുടെയും സമ്മതവും ആവശ്യമാണ്.</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span>കുടുംബ ബന്ധങ്ങൾ</span>
+                            <span class="accordion-icon">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <p class="accordion-text">മാതാപിതാക്കൾക്ക് മാനവും ദയയും അർഹിക്കുന്നു. കുട്ടികൾക്ക് പരിചരണവും വിദ്യാഭ്യാസവും അർഹിക്കുന്നു. വിസ്തൃത കുടുംബ ബന്ധങ്ങൾ കരുണയോടെ നിലനിർത്തണം.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 2: PARENTING -->
+    <main class="parenting-page">
+        <div class="parenting-shell">
+            <section id="parenting" class="parenting-hero">
+                <div class="parenting-badge">
+                    <i class="fas fa-seedling"></i>
+                    Family Guidance
+                </div>
+                <h1 class="parenting-title">👨‍👩‍👧 മാതാപിതൃത്വം (Parenting)</h1>
+                <p class="parenting-subtitle">
+                    പ്രായത്തിന്റെ ആവശ്യവും ഖുര്‍ആനിന്റെ പ്രകാശവും ചേര്‍ത്ത്, സ്നേഹപൂര്‍ണവും ഉത്തരവാദിത്വബോധമുള്ളതുമായ
+                    കുടുംബ വളര്‍ച്ചയ്ക്ക് സഹായിക്കുന്ന ഒരു മനോഹരമായ മാതാപിതൃ മാർഗ്ഗദർശിനി.
+                </p>
+            </section>
+
+            <section class="parenting-panel-wrap" aria-label="Parenting tabs">
+                <div class="parenting-tabs" role="tablist" aria-label="Parenting content tabs">
+                    <button class="parenting-tab active" id="tab-age" type="button" role="tab"
+                        aria-selected="true" aria-controls="panel-age" data-target="panel-age">
+                        🌿 വയസ്സനുസരിച്ചുള്ള മാതാപിതൃത്വം
+                    </button>
+                    <button class="parenting-tab" id="tab-quran" type="button" role="tab"
+                        aria-selected="false" aria-controls="panel-quran" data-target="panel-quran">
+                        🌿 ഇസ്‌ലാമിക മാതാപിതൃത്വം (ഖുര്‍ആന്‍ അടിസ്ഥാനത്തില്‍)
+                    </button>
+                </div>
+
+                <div class="tab-panel active" id="panel-age" role="tabpanel" aria-labelledby="tab-age">
+                    <div class="section-intro">
+                        <h2>വയസ്സിനൊപ്പം മാറുന്ന മാതാപിതൃ പങ്ക്</h2>
+                        <p>
+                            ഓരോ പ്രായ ഘട്ടത്തിലും കുട്ടികളുടെ മാനസിക, ബൗദ്ധിക, ആത്മീയ ആവശ്യങ്ങള്‍ വ്യത്യാസപ്പെടുന്നു.
+                            അതിനാല്‍ മാതാപിതാക്കളുടെ സമീപനവും മാറണം. സ്നേഹം, നിയന്ത്രണം, സംഭാഷണം, വിശ്വാസം,
+                            പിന്തുണ എന്നിങ്ങനെ ഘട്ടംഘട്ടമായി കുടുംബബന്ധം വളര്‍ത്തുക.
+                        </p>
+                    </div>
+
+                    <div class="parenting-grid">
+                        <article class="parenting-card soft-tone">
+                            <div class="card-meta">
+                                <span class="age-pill"><i class="fas fa-baby"></i> 👶 0-5</span>
+                                <span class="ayah-chip">ലുക്മാന്‍ 31:14</span>
+                            </div>
+                            <h3>സ്നേഹവും സുരക്ഷയും</h3>
+                            <span class="focus-line">Focus: Love & Security</span>
+                            <p>
+                                ഈ പ്രായത്തില്‍ കുഞ്ഞ് ലോകത്തെ ആദ്യം അറിയുന്നത് മാതാപിതാക്കളുടെ മുഖത്തുനിന്നും ശബ്ദത്തില്‍നിന്നും
+                                സ്പര്‍ശത്തില്‍നിന്നുമാണ്. സുരക്ഷിതമായ ബന്ധം ഭാവി വിശ്വാസത്തിന്റെ അടിത്തറയാകുന്നു.
+                            </p>
+                            <p class="quran-text">"അവന്റെ അമ്മ അവനെ ബുദ്ധിമുട്ടിന് മുകളില്‍ ബുദ്ധിമുട്ടോടെ ഗര്‍ഭം ധരിച്ചു..."</p>
+                            <ul class="responsibility-list">
+                                <li>കുഞ്ഞിന് നിരന്തര സ്നേഹവും സംരക്ഷണബോധവും നല്‍കുക</li>
+                                <li>അല്ലാഹുവിന്റെ നാമം, ദുആ, ശുചിത്വം പോലുള്ള അടിസ്ഥാന ശീലങ്ങള്‍ പരിചയപ്പെടുത്തുക</li>
+                                <li>ഭയപ്പെടുത്തല്‍ക്കു പകരം ആശ്വാസം നിറഞ്ഞ പ്രതികരണം നല്‍കുക</li>
+                            </ul>
+                            <div class="tip-box">
+                                <strong>👉 മലയാളം ടിപ്പ്</strong>
+                                ഉറക്കത്തിന് മുമ്പ് ചെറിയ ദുആയും സ്നേഹപൂര്‍ണമായ ചേർത്തുപിടിത്തവും കുഞ്ഞിന്റെ ഹൃദയത്തില്‍ സമാധാനം ഉണ്ടാക്കും.
+                            </div>
+                        </article>
+
+                        <article class="parenting-card">
+                            <div class="card-meta">
+                                <span class="age-pill"><i class="fas fa-child"></i> 🧒 6-10</span>
+                                <span class="ayah-chip">താഹാ 20:132</span>
+                            </div>
+                            <h3>ശീലവും നിയന്ത്രണവും</h3>
+                            <span class="focus-line">Focus: Discipline & Habits</span>
+                            <p>
+                                കുട്ടികള്‍ മാതൃകകളെ അതിവേഗം സ്വീകരിക്കുന്ന കാലഘട്ടമാണിത്. ഈ പ്രായത്തില്‍ ദിനചര്യയും
+                                ശീലങ്ങളും സ്ഥിരപ്പെടുത്തുന്നത് ഭാവിയിലേക്കുള്ള വലിയ നിക്ഷേപമാണ്.
+                            </p>
+                            <p class="quran-text">"നിന്റെ കുടുംബത്തോട് നമസ്‌കാരത്തിന് നിര്‍ദ്ദേശം നല്‍കുക; അതില്‍ സ്ഥിരത പുലര്‍ത്തുക."</p>
+                            <ul class="responsibility-list">
+                                <li>നമസ്‌കാരം, ആദബ്, സമയം പാലിക്കല്‍ എന്നിവയില്‍ സ്ഥിരമായ പരിശീലനം നല്‍കുക</li>
+                                <li>സ്നേഹത്തോടെ പരിധികളും നിയമങ്ങളും പഠിപ്പിക്കുക</li>
+                                <li>സ്ക്രീന്‍ സമയം, സുഹൃത്ത് വലയങ്ങള്‍ എന്നിവക്ക് ബുദ്ധിപരമായ നിയന്ത്രണം നല്‍കുക</li>
+                            </ul>
+                            <div class="tip-box">
+                                <strong>👉 മലയാളം ടിപ്പ്</strong>
+                                "ആദ്യം നമ്മള്‍ ചെയ്യുക, ശേഷം കുട്ടി പഠിക്കും" എന്ന മനോഭാവം ഈ പ്രായത്തില്‍ ഏറ്റവും ഫലപ്രദമാണ്.
+                            </div>
+                        </article>
+
+                        <article class="parenting-card">
+                            <div class="card-meta">
+                                <span class="age-pill"><i class="fas fa-user-friends"></i> 🧑 11-15</span>
+                                <span class="ayah-chip">ലുക്മാന്‍ 31:13</span>
+                            </div>
+                            <h3>മാർഗ്ഗനിർദ്ദേശവും സംഭാഷണവും</h3>
+                            <span class="focus-line">Focus: Guidance & Communication</span>
+                            <p>
+                                ആത്മപരിചയവും ചോദ്യങ്ങളും വികാരമാറ്റങ്ങളും ശക്തമാകുന്ന പ്രായമാണിത്. ഉപദേശം മാത്രം മതിയാകില്ല;
+                                കേള്‍ക്കുന്ന മാതാപിതാക്കള്‍ അത്യാവശ്യമാണ്.
+                            </p>
+                            <p class="quran-text">"എന്റെ മകനേ, അല്ലാഹുവിനോട് പങ്കാളികളെ ചേര്‍ക്കരുത്..."</p>
+                            <ul class="responsibility-list">
+                                <li>നേരിട്ട് വിമര്‍ശിക്കാതെ സംഭാഷണത്തിലൂടെ മൂല്യങ്ങള്‍ പഠിപ്പിക്കുക</li>
+                                <li>സുഹൃത്തുക്കള്‍, ഓണ്‍ലൈന്‍ ഇടപെടലുകള്‍, ആത്മവിശ്വാസം എന്നിവ ശ്രദ്ധിക്കുക</li>
+                                <li>ഇമാന്‍, ശരീരമാറ്റങ്ങള്‍, ഉത്തരവാദിത്വം തുടങ്ങിയ വിഷയങ്ങളില്‍ തുറന്ന സംഭാഷണം തുടങ്ങുക</li>
+                            </ul>
+                            <div class="tip-box">
+                                <strong>👉 മലയാളം ടിപ്പ്</strong>
+                                ദിവസവും 10 മിനിറ്റ് വിധിയില്ലാത്ത സംഭാഷണം കുട്ടിയുടെ മനസിലേക്ക് കടക്കാനുള്ള വാതില്‍ തുറക്കും.
+                            </div>
+                        </article>
+
+                        <article class="parenting-card">
+                            <div class="card-meta">
+                                <span class="age-pill"><i class="fas fa-user-graduate"></i> 🧑‍🎓 16-18</span>
+                                <span class="ayah-chip">അല്‍-ഇസ്റാ 17:23</span>
+                            </div>
+                            <h3>വിശ്വാസവും ഉത്തരവാദിത്വവും</h3>
+                            <span class="focus-line">Focus: Trust & Responsibility</span>
+                            <p>
+                                സ്വതന്ത്ര ചിന്തയും വലിയ തീരുമാനങ്ങളിലേക്കുള്ള തയ്യാറെടുപ്പും ഈ പ്രായത്തില്‍ ശക്തമാകും.
+                                നിയന്ത്രണത്തിനേക്കാള്‍ വിശ്വാസഭരിതമായ മാര്‍ഗനിര്‍ദ്ദേശം ഇവിടെ പ്രധാനമാണ്.
+                            </p>
+                            <p class="quran-text">"കരുണയോടെ അവര്‍ക്ക് നമ്രതയുടെ ചിറകുതാഴ്ത്തുക."</p>
+                            <ul class="responsibility-list">
+                                <li>പഠനം, തൊഴില്‍, സൗഹൃദം, ജീവിത തീരുമാനം എന്നിവ ചര്‍ച്ച ചെയ്യുക</li>
+                                <li>ഉത്തരവാദിത്വങ്ങള്‍ ഏല്‍പ്പിച്ച് വിശ്വാസം പ്രകടിപ്പിക്കുക</li>
+                                <li>തെറ്റുകളില്‍ അപമാനമല്ല, തിരുത്തലും പിന്തുണയും നല്‍കുക</li>
+                            </ul>
+                            <div class="tip-box">
+                                <strong>👉 മലയാളം ടിപ്പ്</strong>
+                                തീരുമാനമെടുക്കാന്‍ അവരെ ഉള്‍പ്പെടുത്തുമ്പോള്‍ ഉത്തരവാദിത്വബോധം സ്വാഭാവികമായി വളരും.
+                            </div>
+                        </article>
+
+                        <article class="parenting-card">
+                            <div class="card-meta">
+                                <span class="age-pill"><i class="fas fa-user-tie"></i> 🧑‍💼 18+</span>
+                                <span class="ayah-chip">അല്‍-ഫുര്‍ഖാന്‍ 25:74</span>
+                            </div>
+                            <h3>പിന്തുണയും സൗഹൃദവും</h3>
+                            <span class="focus-line">Focus: Support & Friendship</span>
+                            <p>
+                                വളര്‍ന്ന മക്കള്‍ക്ക് മാതാപിതാക്കള്‍ നിയന്ത്രകരായി തുടരേണ്ടതില്ല; ബഹുമാനമുള്ള ഉപദേശകരും
+                                ദുആ ചെയ്യുന്ന കൂട്ടാളികളുമായി മാറാം.
+                            </p>
+                            <p class="quran-text">"ഞങ്ങളുടെ ഭാര്യമാരെയും മക്കളെയും കണ്ണിന് തണുപ്പാകുന്നവരാക്കണമേ..."</p>
+                            <ul class="responsibility-list">
+                                <li>ജീവിത തിരഞ്ഞെടുപ്പുകളില്‍ പ്രാര്‍ത്ഥനയോടും ബഹുമാനത്തോടും കൂടിയ പിന്തുണ നല്‍കുക</li>
+                                <li>വിവാഹം, ജോലി, സമൂഹപങ്ക് എന്നിവയില്‍ സൗഹൃദപരമായ സംഭാഷണം തുടരുക</li>
+                                <li>സ്വന്തം ജീവിതത്തില്‍ അവർ വളരാന്‍ ഇടം കൊടുക്കുക</li>
+                            </ul>
+                            <div class="tip-box">
+                                <strong>👉 മലയാളം ടിപ്പ്</strong>
+                                ഉപദേശം നല്‍കുന്നതിന് മുമ്പ് അവരുടെ സാഹചര്യവും കേട്ടറിഞ്ഞാല്‍ ബന്ധം ദീര്‍ഘകാലം സുന്ദരമായി നിലനില്‍ക്കും.
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="parenting-summary">
+                        <h3>പ്രായം vs മാതാപിതാക്കളുടെ പ്രധാന പങ്ക്</h3>
+                        <div class="summary-table-wrap">
+                            <table class="summary-table">
+                                <thead>
+                                    <tr>
+                                        <th>പ്രായം</th>
+                                        <th>പ്രധാന ഫോക്കസ്</th>
+                                        <th>മാതാപിതാക്കളുടെ പങ്ക്</th>
+                                        <th>ഖുര്‍ആന്‍ സൂചന</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>0-5</td>
+                                        <td>സ്നേഹവും സുരക്ഷയും</td>
+                                        <td>ആശ്വാസം, അടുപ്പം, വിശ്വാസത്തിന്റെ വിത്ത്</td>
+                                        <td>ലുക്മാന്‍ 31:14</td>
+                                    </tr>
+                                    <tr>
+                                        <td>6-10</td>
+                                        <td>നിയന്ത്രണവും ശീലങ്ങളും</td>
+                                        <td>ദിനചര്യ, നമസ്‌കാരം, ആദബ്</td>
+                                        <td>താഹാ 20:132</td>
+                                    </tr>
+                                    <tr>
+                                        <td>11-15</td>
+                                        <td>മാർഗ്ഗനിർദ്ദേശവും സംഭാഷണവും</td>
+                                        <td>കേള്‍ക്കുക, പഠിപ്പിക്കുക, കൂടെയിരിക്കുക</td>
+                                        <td>ലുക്മാന്‍ 31:13</td>
+                                    </tr>
+                                    <tr>
+                                        <td>16-18</td>
+                                        <td>വിശ്വാസവും ഉത്തരവാദിത്വവും</td>
+                                        <td>ബഹുമാനിക്കുക, ഏല്‍പ്പിക്കുക, നയിക്കുക</td>
+                                        <td>അല്‍-ഇസ്റാ 17:23</td>
+                                    </tr>
+                                    <tr>
+                                        <td>18+</td>
+                                        <td>പിന്തുണയും സൗഹൃദവും</td>
+                                        <td>ഉപദേശം, ദുആ, സ്വാതന്ത്ര്യത്തിന് പിന്തുണ</td>
+                                        <td>അല്‍-ഫുര്‍ഖാന്‍ 25:74</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-panel" id="panel-quran" role="tabpanel" aria-labelledby="tab-quran">
+                    <div class="section-intro">
+                        <h2>ഖുര്‍ആനിലൂടെ വീട്ടിനെ പക്വമാക്കുന്ന മാതാപിതൃത്വം</h2>
+                        <p>
+                            ഖുര്‍ആന്‍ കുട്ടികളെ വളര്‍ത്തുന്നതിനുള്ള ആശയങ്ങളും ശൈലിയും ആത്മീയ ദിശയും നല്കുന്നു. ഇവിടെ ഓരോ
+                            വിഷയം വേറിട്ട കാര്‍ഡുകളായി അവതരിപ്പിച്ചിരിക്കുന്നു, പഠിക്കാനും പങ്കിടാനും എളുപ്പമാക്കാന്‍.
+                        </p>
+                    </div>
+
+                    <div class="parenting-grid">
+                        <article class="parenting-card quran-card">
+                            <div class="topic-icon"><i class="fas fa-hands-holding-child"></i></div>
+                            <h3>1. മക്കള്‍ ഒരു അമാനത്ത്</h3>
+                            <p>മക്കള്‍ സ്വന്തമായി കൈവശം വയ്ക്കാനുള്ള വസ്തു അല്ല; അല്ലാഹു നല്കിയ ഉത്തരവാദിത്വവും വിശ്വാസവുമാണ്.</p>
+                            <span class="ayah-highlight">അല്‍-അന്‍ഫാല്‍ 8:28</span>
+                            <div class="duty-box">
+                                <strong>👉 മാതാപിതാക്കളുടെ കടമ</strong>
+                                മക്കളെ സ്വന്തമായ ഇച്ഛപ്രകാരം രൂപപ്പെടുത്താന്‍ ശ്രമിക്കുന്നതിന് പകരം, അല്ലാഹുവിന് പ്രസാദകരമായ
+                                ജീവിതത്തിലേക്ക് നയിക്കണം.
+                            </div>
+                        </article>
+
+                        <article class="parenting-card quran-card">
+                            <div class="topic-icon"><i class="fas fa-mosque"></i></div>
+                            <h3>2. തൗഹീദ് പഠിപ്പിക്കുക</h3>
+                            <p>വിശ്വാസത്തിന്റെ അടിസ്ഥാനമായ തൗഹീദ് ബാല്യത്തിലേ മനസില്‍ പതിപ്പിക്കണം. ഇമാനിന്റെ അടിത്തറ അതാണ്.</p>
+                            <span class="ayah-highlight">ലുക്മാന്‍ 31:13</span>
+                            <div class="duty-box">
+                                <strong>👉 മാതാപിതാക്കളുടെ കടമ</strong>
+                                അല്ലാഹു ഒരുവനാണെന്നും അവനില്‍ ആശ്രയിക്കണമെന്നും ജീവിതത്തിലെ ഉദാഹരണങ്ങളിലൂടെ പഠിപ്പിക്കുക.
+                            </div>
+                        </article>
+
+                        <article class="parenting-card quran-card">
+                            <div class="topic-icon"><i class="fas fa-star-and-crescent"></i></div>
+                            <h3>3. നല്ല ശീലങ്ങള്‍</h3>
+                            <p>അദബ്, സത്യസന്ധത, വിനയം, ശുചിത്വം, സമയപാലനം തുടങ്ങിയ ഗുണങ്ങള്‍ കുടുംബത്തില്‍നിന്നാണ് ആദ്യം പഠിക്കുന്നത്.</p>
+                            <span class="ayah-highlight">ലുക്മാന്‍ 31:17-19</span>
+                            <div class="duty-box">
+                                <strong>👉 മാതാപിതാക്കളുടെ കടമ</strong>
+                                ശീലങ്ങള്‍ വാക്കുകള്‍ കൊണ്ട് മാത്രമല്ല; വീട്ടിലെ അന്തരീക്ഷം, സംസാരശൈലി, പെരുമാറ്റം എന്നിവയിലൂടെ വളര്‍ത്തണം.
+                            </div>
+                        </article>
+
+                        <article class="parenting-card quran-card">
+                            <div class="topic-icon"><i class="fas fa-comment-dots"></i></div>
+                            <h3>4. മൃദുവായി സംസാരിക്കുക</h3>
+                            <p>കരുണയുള്ള ഭാഷ ഹൃദയം തുറക്കും. കടുപ്പം പലപ്പോഴും ബന്ധം മുറുക്കുന്നതിന് പകരം അകലം സൃഷ്ടിക്കും.</p>
+                            <span class="ayah-highlight">താഹാ 20:44</span>
+                            <div class="duty-box">
+                                <strong>👉 മാതാപിതാക്കളുടെ കടമ</strong>
+                                തിരുത്തലുകള്‍ പോലും മൃദുവായ വാക്കുകളോടെയും മാന്യതയോടെയും നല്‍കുക.
+                            </div>
+                        </article>
+
+                        <article class="parenting-card quran-card">
+                            <div class="topic-icon"><i class="fas fa-balance-scale"></i></div>
+                            <h3>5. നീതി പാലിക്കുക</h3>
+                            <p>മക്കള്‍ക്കിടയില്‍ അനീതി കാണിച്ചാല്‍ അസൂയയും മുറിവുകളും വളരും. നീതിയുള്ള സമീപനം ബന്ധങ്ങളെ സമാധാനത്തിലാക്കും.</p>
+                            <span class="ayah-highlight">അന്‍-നിസാഅ് 4:135</span>
+                            <div class="duty-box">
+                                <strong>👉 മാതാപിതാക്കളുടെ കടമ</strong>
+                                സ്നേഹം, സമയം, പ്രശംസ, ഉത്തരവാദിത്വം എന്നിവയില്‍ ന്യായമായ സമീപനം പാലിക്കുക.
+                            </div>
+                        </article>
+
+                        <article class="parenting-card quran-card">
+                            <div class="topic-icon"><i class="fas fa-shield-alt"></i></div>
+                            <h3>6. ആത്മീയ സംരക്ഷണം</h3>
+                            <p>കുടുംബത്തെ ലോകീയ വിജയത്തിനൊപ്പം അഖിറത്തിന്റെ സുരക്ഷയിലേക്കും നയിക്കണം. ഇമാനാണ് യഥാര്‍ഥ സംരക്ഷണം.</p>
+                            <span class="ayah-highlight">അത്ഹ്-തഹ്‌രീം 66:6</span>
+                            <div class="duty-box">
+                                <strong>👉 മാതാപിതാക്കളുടെ കടമ</strong>
+                                ഹലാല്‍, നമസ്‌കാരം, ഖുര്‍ആന്‍, ദുആ, നല്ല കൂട്ടുകെട്ട് എന്നിവ കുടുംബത്തിന്റെ ജീവിതരീതിയാക്കുക.
+                            </div>
+                        </article>
+
+                        <article class="parenting-card quran-card">
+                            <div class="topic-icon"><i class="fas fa-hands"></i></div>
+                            <h3>7. ദുആ ചെയ്യുക</h3>
+                            <p>മക്കള്‍ക്കുവേണ്ടി ചെയ്യുന്ന ദുആ മാതാപിതാക്കളുടെ ഹൃദയബന്ധത്തിന്റെ ഏറ്റവും സുന്ദരമായ രൂപമാണ്.</p>
+                            <span class="ayah-highlight">അല്‍-ഫുര്‍ഖാന്‍ 25:74</span>
+                            <div class="duty-box">
+                                <strong>👉 മാതാപിതാക്കളുടെ കടമ</strong>
+                                കുട്ടികളുടെ ഇമാന്‍, ആരോഗ്യo, സ്വഭാവം, ഭാവി എന്നിവയ്ക്ക് സ്ഥിരമായി ദുആ ചെയ്യുക.
+                            </div>
+                        </article>
+
+                        <article class="parenting-card quran-card">
+                            <div class="topic-icon"><i class="fas fa-comments"></i></div>
+                            <h3>8. അഭിപ്രായം കേള്‍ക്കുക</h3>
+                            <p>കുട്ടികളുടെ ചിന്തകള്‍ കേള്‍ക്കുമ്പോള്‍ അവർ ബഹുമാനിക്കപ്പെട്ടവരാണെന്ന് അനുഭവിക്കുന്നു. അത് ആത്മവിശ്വാസം വളര്‍ത്തും.</p>
+                            <span class="ayah-highlight">ആല്‍-ഇംറാന്‍ 3:159</span>
+                            <div class="duty-box">
+                                <strong>👉 മാതാപിതാക്കളുടെ കടമ</strong>
+                                ചോദിക്കാന്‍ ഭയപ്പെടാത്ത, അഭിപ്രായം പങ്കിടാന്‍ കഴിയുന്ന സുരക്ഷിത കുടുംബാന്തരീക്ഷം സൃഷ്ടിക്കുക.
+                            </div>
+                        </article>
+
+                        <article class="parenting-card quran-card">
+                            <div class="topic-icon"><i class="fas fa-heart"></i></div>
+                            <h3>9. കൃതജ്ഞത</h3>
+                            <p>കൃതജ്ഞത പഠിക്കുന്ന കുട്ടികള്‍ അനുഗ്രഹങ്ങളുടെ മൂല്യം തിരിച്ചറിയുകയും പരാതിക്കാരരല്ല, നന്ദിയുള്ളവരായി വളരുകയും ചെയ്യും.</p>
+                            <span class="ayah-highlight">ലുക്മാന്‍ 31:14</span>
+                            <div class="duty-box">
+                                <strong>👉 മാതാപിതാക്കളുടെ കടമ</strong>
+                                അല്ലാഹുവിനോടുള്ള നന്ദിയും മനുഷ്യരോടുള്ള നന്ദിയും ദിനജീവിതത്തില്‍ പരിശീലിപ്പിക്കുക.
+                            </div>
+                        </article>
+
+                        <article class="parenting-card quran-card">
+                            <div class="topic-icon"><i class="fas fa-dove"></i></div>
+                            <h3>10. കരുണയും സൗകര്യവും</h3>
+                            <p>ഇസ്ലാം കടുപ്പത്തിന്റെ മതമല്ല; കരുണയും സൗകര്യവും നിറഞ്ഞ ജീവിതപാഠമാണ്. വളര്‍ത്തലിലും അത് പ്രകടമാകണം.</p>
+                            <span class="ayah-highlight">അല്‍-ബഖറ 2:185</span>
+                            <div class="duty-box">
+                                <strong>👉 മാതാപിതാക്കളുടെ കടമ</strong>
+                                കുട്ടികളുടെ ശേഷിയും സാഹചര്യവും മനസ്സിലാക്കി, പ്രോത്സാഹിപ്പിക്കുന്ന രീതിയില്‍ പഠിപ്പിക്കുകയും തിരുത്തുകയും ചെയ്യുക.
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <div class="section-anchor-grid">
+                <a class="anchor-card" href="fam-new.html#family">
+                    <strong>Family</strong>
+                    <span>Islamic family life, roles and guidance</span>
+                </a>
+                <a class="anchor-card" href="fam-new.html#parenting">
+                    <strong>👶 Parenting</strong>
+                    <span>Age-based and Quran-based guidance</span>
+                </a>
+                <a class="anchor-card" href="fam-new.html#women">
+                    <strong>🧕 Women Issues</strong>
+                    <span>Dignity, rights and support</span>
+                </a>
+                <a class="anchor-card" href="fam-new.html#men">
+                    <strong>👨 Men Issues</strong>
+                    <span>Leadership, mercy and accountability</span>
+                </a>
+            </div>
+
+            <section id="marriage" class="family-placeholder">
+                <h3>💍 Marriage (Nikah)</h3>
+                <p>ഈ വിഭാഗം പിന്നീട് വിശദമായി വികസിപ്പിക്കാം. നിലവില്‍ Parenting UI ആണ് പ്രധാനമായി തയ്യാറാക്കിയിരിക്കുന്നത്.</p>
+            </section>
+
+            <section id="women" class="women-section fade-reveal">
+                <div class="women-hero">
+                    <div class="parenting-badge">
+                        <i class="fas fa-female"></i>
+                        Women's Guidance
+                    </div>
+                    <h2 class="parenting-title">🌸 സ്ത്രീകളുടെ പ്രശ്നങ്ങള്‍</h2>
+                    <p class="parenting-subtitle">ജീവിതത്തിലെ വെല്ലുവിളികളും ഖുര്‍ആന്‍ മാര്‍ഗ്ഗനിര്‍ദേശവും</p>
+                </div>
+
+                <div class="parenting-panel-wrap" data-tab-group>
+                    <div class="issue-search">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="womenIssueSearch" placeholder="പ്രശ്നം, പ്രായം, അല്ലെങ്കില്‍ പരിഹാരം തിരയുക...">
+                    </div>
+
+                    <div class="parenting-tabs" role="tablist" aria-label="Women issues tabs">
+                        <button class="parenting-tab active" id="tab-women-age" type="button" role="tab"
+                            aria-selected="true" aria-controls="panel-women-age" data-target="panel-women-age">
+                            🌿 വയസ്സനുസരിച്ചുള്ള പ്രശ്നങ്ങള്‍
+                        </button>
+                        <button class="parenting-tab" id="tab-women-deen" type="button" role="tab"
+                            aria-selected="false" aria-controls="panel-women-deen" data-target="panel-women-deen">
+                            🌿 ഖുര്‍ആന്‍ & ദീന്‍ അടിസ്ഥാനത്തിലുള്ള പ്രശ്നങ്ങള്‍
+                        </button>
+                    </div>
+
+                    <div class="tab-panel active" id="panel-women-age" role="tabpanel" aria-labelledby="tab-women-age">
+                        <div class="section-intro">
+                            <h2>പ്രായം മാറുമ്പോള്‍ സ്ത്രീയുടെ വെല്ലുവിളികളും ആവശ്യങ്ങളും</h2>
+                            <p>
+                                കൗമാരത്തില്‍നിന്ന് വാര്‍ദ്ധക്യത്തിലേക്ക്, സ്ത്രീജീവിതം വികാരപരമായും സാമൂഹികമായും
+                                ആത്മീയമായും വ്യത്യസ്ത പരീക്ഷണങ്ങളിലൂടെ കടന്നുപോകുന്നു. ഓരോ ഘട്ടത്തിനും ദീന്‍ നല്‍കുന്ന
+                                ദിശയും സ്ഥിരതയും ഇവിടെ കാര്‍ഡുകളായി ക്രമീകരിച്ചിരിക്കുന്നു.
+                            </p>
+                        </div>
+
+                        <div class="parenting-grid">
+                            <article class="parenting-card fade-reveal" data-women-card data-search="13 18 teenage identity modesty peer pressure confidence body image salah">
+                                <div class="card-meta">
+                                    <span class="age-pill"><i class="fas fa-user-graduate"></i> 👧 13-18 വയസ്</span>
+                                    <span class="ayah-chip">അന്നൂര്‍ 24:31</span>
+                                </div>
+                                <h3>തിരിച്ചറിവും ആത്മവിശ്വാസവും രൂപപ്പെടുന്ന കാലം</h3>
+                                <ul class="responsibility-list">
+                                    <li>സ്വരൂപത്തെക്കുറിച്ചുള്ള ആശങ്കയും താരതമ്യബോധവും</li>
+                                    <li>സുഹൃത്ത് സമ്മര്‍ദ്ദം, സോഷ്യല്‍ മീഡിയ സ്വാധീനം</li>
+                                    <li>ഹിജാബ്, ശീലങ്ങള്‍, ദീന്‍ എന്നിവയില്‍ സ്ഥിരതക്കുറവ്</li>
+                                </ul>
+                                <div class="duty-box">
+                                    <strong>👉 പരിഹാരം</strong>
+                                    <ul class="solution-list">
+                                        <li>അല്ലാഹു നല്‍കിയ മഹത്വബോധത്തോടെയുള്ള ആത്മവിശ്വാസം വളര്‍ത്തുക</li>
+                                        <li>നല്ല കൂട്ടുകാരും നല്ല ഉള്ളടക്കവും തിരഞ്ഞെടുക്കാന്‍ പഠിക്കുക</li>
+                                        <li>ദീന്‍ ശിക്ഷയായി അല്ല, ആദരവിന്റെയും സംരക്ഷണത്തിന്റെയും വഴിയായി പരിചയപ്പെടുക</li>
+                                    </ul>
+                                </div>
+                            </article>
+
+                            <article class="parenting-card fade-reveal" data-women-card data-search="19 25 youth education career marriage delay emotional confusion independence">
+                                <div class="card-meta">
+                                    <span class="age-pill"><i class="fas fa-user"></i> 👩 19-25 വയസ്</span>
+                                    <span class="ayah-chip">അല്‍-ഖസസ് 28:26</span>
+                                </div>
+                                <h3>പഠനവും ജീവിതതീര്‍മ്മാനങ്ങളും നിറഞ്ഞ പ്രായം</h3>
+                                <ul class="responsibility-list">
+                                    <li>പഠനം, തൊഴില്‍, വിവാഹം എന്നിവയെക്കുറിച്ചുള്ള സമ്മര്‍ദ്ദം</li>
+                                    <li>സ്വാതന്ത്ര്യവും കുടുംബ പ്രതീക്ഷകളും തമ്മിലുള്ള സംഘര്‍ഷം</li>
+                                    <li>വികാരപരമായ ആകര്‍ഷണങ്ങളും അസ്വസ്ഥമായ ബന്ധങ്ങളും</li>
+                                </ul>
+                                <div class="duty-box">
+                                    <strong>👉 പരിഹാരം</strong>
+                                    <ul class="solution-list">
+                                        <li>ലജ്ജയും ബുദ്ധിയും ഉള്ള തിരഞ്ഞെടുപ്പുകള്‍ക്ക് മുന്‍ഗണന നല്‍കുക</li>
+                                        <li>വലിയ തീരുമാനങ്ങളില്‍ ഇസ്തിഖാരയും ഉപദേശവും സ്വീകരിക്കുക</li>
+                                        <li>മൂല്യങ്ങളെ ഉപേക്ഷിക്കാതെ സ്വയം വളരാനുള്ള ദിശ നിശ്ചയിക്കുക</li>
+                                    </ul>
+                                </div>
+                            </article>
+
+                            <article class="parenting-card fade-reveal" data-women-card data-search="26 40 marriage motherhood work burnout home children balance stress">
+                                <div class="card-meta">
+                                    <span class="age-pill"><i class="fas fa-user-tie"></i> 👩‍👧 26-40 വയസ്</span>
+                                    <span class="ayah-chip">അല്‍-ബഖറ 2:286</span>
+                                </div>
+                                <h3>കുടുംബച്ചുമതലയും വ്യക്തിജീവിതവും തുല്യമായി നയിക്കേണ്ട ഘട്ടം</h3>
+                                <ul class="responsibility-list">
+                                    <li>വിവാഹജീവിതം, മാതൃത്വം, ജോലി എന്നിവയുടെ ഭാരം</li>
+                                    <li>സ്വന്തത്തിന് സമയം കുറയുക, വികാര ക്ഷീണം</li>
+                                    <li>അംഗീകാരക്കുറവും മാനസിക സമ്മര്‍ദ്ദവും</li>
+                                </ul>
+                                <div class="duty-box">
+                                    <strong>👉 പരിഹാരം</strong>
+                                    <ul class="solution-list">
+                                        <li>ശേഷിയ്ക്ക് മുകളിലുള്ള ഭാരമില്ലെന്ന് ഖുര്‍ആന്‍ പഠിപ്പിക്കുന്ന ആശ്വാസം ഉള്‍ക്കൊള്‍ക്കുക</li>
+                                        <li>സഹായം ചോദിക്കാനും ചുമതല പങ്കിടാനും മടിക്കരുത്</li>
+                                        <li>ഇബാദത്തിനും വിശ്രമത്തിനും സ്വതന്ത്ര സമയം സംരക്ഷിക്കുക</li>
+                                    </ul>
+                                </div>
+                            </article>
+
+                            <article class="parenting-card fade-reveal" data-women-card data-search="41 60 midlife family transitions caregiving patience health wisdom">
+                                <div class="card-meta">
+                                    <span class="age-pill"><i class="fas fa-user-clock"></i> 🧕 41-60 വയസ്</span>
+                                    <span class="ayah-chip">അന്‍-നഹ്ൽ 16:97</span>
+                                </div>
+                                <h3>പരിപക്വതയും കുടുംബപരിവര്‍ത്തനങ്ങളും ഏറ്റെടുക്കുന്ന ഘട്ടം</h3>
+                                <ul class="responsibility-list">
+                                    <li>മക്കളുടെ വളര്‍ച്ച, വിവാഹം, കുടുംബമാറ്റങ്ങള്‍</li>
+                                    <li>ആരോഗ്യപരമായ വെല്ലുവിളികളും വികാരമാറ്റങ്ങളും</li>
+                                    <li>അംഗീകരിക്കപ്പെടാത്ത പരിശ്രമത്തിന്റെ വിഷമം</li>
+                                </ul>
+                                <div class="duty-box">
+                                    <strong>👉 പരിഹാരം</strong>
+                                    <ul class="solution-list">
+                                        <li>നല്ല പ്രവൃത്തികള്‍ക്ക് അല്ലാഹുവിന്റെ വാഗ്ദാനം മാത്രമാണ് യഥാര്‍ഥ പ്രതിഫലം എന്ന് ഓര്‍ക്കുക</li>
+                                        <li>വേദനയെ ദുആയാക്കി മാറ്റുന്ന ശീലം വളര്‍ത്തുക</li>
+                                        <li>അനുഭവത്തെ കുടുംബത്തിനുള്ള ഹിക്മയായും മാർഗ്ഗദർശനമായും പങ്കിടുക</li>
+                                    </ul>
+                                </div>
+                            </article>
+
+                            <article class="parenting-card fade-reveal" data-women-card data-search="60+ elderly loneliness worship akhirah dignity remembrance patience">
+                                <div class="card-meta">
+                                    <span class="age-pill"><i class="fas fa-user-alt"></i> 👵 60+ വയസ്</span>
+                                    <span class="ayah-chip">മര്യം 19:4-6</span>
+                                </div>
+                                <h3>ശാന്തതയും അഖിറത്ത് ചിന്തയും ഗാഢമാകുന്ന പ്രായം</h3>
+                                <ul class="responsibility-list">
+                                    <li>ഒറ്റപ്പെട്ടതിന്റെ വികാരവും ശരീര ക്ഷീണവും</li>
+                                    <li>കഴിഞ്ഞകാലത്തെ കുറിച്ചുള്ള ഭാരവും ആശങ്കയും</li>
+                                    <li>സ്വന്തം മൂല്യം കുറഞ്ഞുവെന്ന തോന്നല്‍</li>
+                                </ul>
+                                <div class="duty-box">
+                                    <strong>👉 പരിഹാരം</strong>
+                                    <ul class="solution-list">
+                                        <li>ദിഖ്റ്, ഖുര്‍ആന്‍, ദുആ എന്നിവ ജീവിതത്തിന്റെ ഹൃദയമാക്കുക</li>
+                                        <li>അനുഭവം അടുത്ത തലമുറയ്ക്ക് കൈമാറുന്ന മഹത്വം തിരിച്ചറിയുക</li>
+                                        <li>അല്ലാഹുവിന്റെ കരുണയിലേക്കുള്ള പ്രത്യാശ ശക്തിപ്പെടുത്തുക</li>
+                                    </ul>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+
+                    <div class="tab-panel" id="panel-women-deen" role="tabpanel" aria-labelledby="tab-women-deen">
+                        <div class="section-intro">
+                            <h2>ഖുര്‍ആനും ദീനും പ്രകാശിപ്പിക്കുന്ന സ്ത്രീജീവിത പ്രശ്നങ്ങള്‍</h2>
+                            <p>
+                                ദീന്‍ സ്ത്രീയ്ക്ക് നിയന്ത്രണമല്ല, മാന്യതയും സംരക്ഷണവും ദിശയും നല്‍കുന്ന
+                                കരുണയാണ്. ഇവിടെ സാധാരണയായി നേരിടുന്ന ചില പ്രശ്നങ്ങള്‍ക്കും ഖുര്‍ആനിക ദിശയ്ക്കുമിടയിലെ
+                                ബന്ധം കാര്‍ഡുകളിലൂടെ അവതരിപ്പിച്ചിരിക്കുന്നു.
+                            </p>
+                        </div>
+
+                        <div class="parenting-grid">
+                            <article class="parenting-card quran-card fade-reveal" data-women-card data-search="ആത്മവിശ്വാസക്കുറവ് dignity worth self esteem honour taqwa">
+                                <div class="issue-card-title">
+                                    <div class="topic-icon"><i class="fas fa-gem"></i></div>
+                                    <h3>1. ആത്മവിശ്വാസക്കുറവ്</h3>
+                                </div>
+                                <p class="issue-text">താരതമ്യം, വിമര്‍ശനം, സമൂഹത്തിന്റെ തെറ്റായ മാനദണ്ഡങ്ങള്‍ എന്നിവ സ്ത്രീയെ ഉള്ളില്‍നിന്ന് തളര്‍ത്താം.</p>
+                                <span class="ayah-highlight">അല്‍-ഹുജുറാത്ത് 49:13</span>
+                                <div class="duty-box">
+                                    <strong>👉 പരിഹാരം</strong>
+                                    <ul class="solution-list">
+                                        <li>മഹത്വത്തിന്റെ അളവ് രൂപമല്ല, തഖ്‌വയാണെന്ന് മനസ്സിലാക്കുക</li>
+                                        <li>അല്ലാഹു സൃഷ്ടിച്ച മഹത്വബോധത്തോടെ സ്വയം കാണാന്‍ പരിശീലിക്കുക</li>
+                                        <li>വേദനിപ്പിക്കുന്ന താരതമ്യശീലങ്ങളില്‍നിന്ന് അകലം പാലിക്കുക</li>
+                                    </ul>
+                                </div>
+                            </article>
+
+                            <article class="parenting-card quran-card fade-reveal" data-women-card data-search="ഹിജാബ് modesty appearance pressure clothing identity">
+                                <div class="issue-card-title">
+                                    <div class="topic-icon"><i class="fas fa-leaf"></i></div>
+                                    <h3>2. ഹിജാബിനെയും ലജ്ജയെയും കുറിച്ചുള്ള സമ്മര്‍ദ്ദം</h3>
+                                </div>
+                                <p class="issue-text">ബാഹ്യസമ്മര്‍ദ്ദവും ഫാഷന്‍ സംസ്കാരവും ദീന്‍ പാലിക്കാനുള്ള ആത്മവിശ്വാസത്തെ ബാധിച്ചേക്കാം.</p>
+                                <span class="ayah-highlight">അന്നൂര്‍ 24:31</span>
+                                <div class="duty-box">
+                                    <strong>👉 പരിഹാരം</strong>
+                                    <ul class="solution-list">
+                                        <li>ഹിജാബ് ഒരു ഭാരം അല്ല, മാന്യതയുടെ അടയാളമാണെന്ന് മനസ്സിലാക്കുക</li>
+                                        <li>അല്ലാഹുവിനുവേണ്ടിയുള്ള ചെറു സ്ഥിരതകളിലൂടെ ആത്മവിശ്വാസം വര്‍ധിപ്പിക്കുക</li>
+                                        <li>സഹായകമായ വിശ്വാസസമൂഹം കണ്ടെത്തുക</li>
+                                    </ul>
+                                </div>
+                            </article>
+
+                            <article class="parenting-card quran-card fade-reveal" data-women-card data-search="വികാരഭാരം emotional burden sadness anxiety loneliness reliance sabr">
+                                <div class="issue-card-title">
+                                    <div class="topic-icon"><i class="fas fa-cloud-rain"></i></div>
+                                    <h3>3. വികാരഭാരം</h3>
+                                </div>
+                                <p class="issue-text">സ്ത്രീ പലപ്പോഴും എല്ലാവര്‍ക്കും ആശ്വാസമാകുമ്പോള്‍, സ്വന്തം വേദന പറയാന്‍ ഇടം കിട്ടാതെ പോകാം.</p>
+                                <span class="ayah-highlight">അശ്-ശര്‍ഹ് 94:5-6</span>
+                                <div class="duty-box">
+                                    <strong>👉 പരിഹാരം</strong>
+                                    <ul class="solution-list">
+                                        <li>കഷ്ടതയ്ക്ക് പിന്നാലെ സൗകര്യമുണ്ടെന്ന അല്ലാഹുവിന്റെ വാഗ്ദാനം ഹൃദയത്തില്‍ സൂക്ഷിക്കുക</li>
+                                        <li>ദുആ, തഫക്കുര്‍, വിശ്വസനീയരായവരോട് സംസാരിക്കല്‍ എന്നിവ ശീലമാക്കുക</li>
+                                        <li>അളവുകൂടിയ ബാധ്യതകള്‍ക്ക് പരിധി വെക്കുക</li>
+                                    </ul>
+                                </div>
+                            </article>
+
+                            <article class="parenting-card quran-card fade-reveal" data-women-card data-search="അനീതി injustice marriage family rights oppression patience justice">
+                                <div class="issue-card-title">
+                                    <div class="topic-icon"><i class="fas fa-balance-scale"></i></div>
+                                    <h3>4. അവഗണനയും അനീതിയും</h3>
+                                </div>
+                                <p class="issue-text">കുടുംബത്തിലോ സമൂഹത്തിലോ സ്ത്രീയുടെ അവകാശങ്ങള്‍ പലപ്പോഴും മനസ്സിലാക്കപ്പെടാതെ പോകാം.</p>
+                                <span class="ayah-highlight">അന്‍-നിസാഅ് 4:19</span>
+                                <div class="duty-box">
+                                    <strong>👉 പരിഹാരം</strong>
+                                    <ul class="solution-list">
+                                        <li>ഇസ്‌ലാം സ്ത്രീയോട് നന്മയോടെയും ബഹുമാനത്തോടെയും പെരുമാറാന്‍ നിര്‍ദ്ദേശിക്കുന്നതാണെന്ന് അറിയുക</li>
+                                        <li>അനീതിയെ മിണ്ടാതിരിക്കാന്‍ പകരം ഹിക്മത്തോടെ അഭിമുഖീകരിക്കുക</li>
+                                        <li>അവകാശങ്ങളെക്കുറിച്ചുള്ള ദീനി അറിവ് വര്‍ധിപ്പിക്കുക</li>
+                                    </ul>
+                                </div>
+                            </article>
+
+                            <article class="parenting-card quran-card fade-reveal" data-women-card data-search="വിവാഹവൈകല്‍ marriage delay future fear loneliness qadr tawakkul">
+                                <div class="issue-card-title">
+                                    <div class="topic-icon"><i class="fas fa-hourglass-half"></i></div>
+                                    <h3>5. വിവാഹം വൈകുന്നതിന്റെ വിഷമം</h3>
+                                </div>
+                                <p class="issue-text">കാലതാമസം ചിലപ്പോള്‍ ഭയവും അപൂര്‍ണതയുടെ തോന്നലും ഉണ്ടാക്കാം.</p>
+                                <span class="ayah-highlight">അത്ഹ്-തലാഖ് 65:3</span>
+                                <div class="duty-box">
+                                    <strong>👉 പരിഹാരം</strong>
+                                    <ul class="solution-list">
+                                        <li>അല്ലാഹുവിന്റെ തീരുമാനം തികച്ചും ജ്ഞാനപൂര്‍ണമാണെന്ന് വിശ്വസിക്കുക</li>
+                                        <li>ജീവിതത്തെ വിവാഹത്തിനായി മാത്രം നിര്‍വചിക്കാതെ ദീനും കഴിവുകളും വികസിപ്പിക്കുക</li>
+                                        <li>തവക്കുല്‍ സഹിതം ശരിയായ ശ്രമം തുടരണം</li>
+                                    </ul>
+                                </div>
+                            </article>
+
+                            <article class="parenting-card quran-card fade-reveal" data-women-card data-search="അഭിപ്രായം പറയാന്‍ ഭയം voice expression shura confidence wisdom">
+                                <div class="issue-card-title">
+                                    <div class="topic-icon"><i class="fas fa-comments"></i></div>
+                                    <h3>6. സ്വന്തം നിലപാട് പറയാനുള്ള ഭയം</h3>
+                                </div>
+                                <p class="issue-text">പല സ്ത്രീകള്‍ക്കും നിസ്സംഗമായി മിണ്ടാതിരിക്കുക സുരക്ഷിതമെന്നാണ് തോന്നുക, പക്ഷേ അത് ഉള്ളിലെ മുറിവുകള്‍ കൂട്ടും.</p>
+                                <span class="ayah-highlight">ആല്‍-ഇംറാന്‍ 3:159</span>
+                                <div class="duty-box">
+                                    <strong>👉 പരിഹാരം</strong>
+                                    <ul class="solution-list">
+                                        <li>ഹിക്മയും ആദബും പാലിച്ചുള്ള സംവാദം അഭ്യസിക്കുക</li>
+                                        <li>ഭയം കൊണ്ടുള്ള മൗനം മാറി ബഹുമാനത്തോടെയുള്ള വ്യക്തത സ്വീകരിക്കുക</li>
+                                        <li>ശരിയായ കാര്യത്തില്‍ ഉറച്ചുനില്‍ക്കുന്നത് ദീനി ശക്തിയുടെ ഭാഗമാണെന്ന് മനസ്സിലാക്കുക</li>
+                                    </ul>
+                                </div>
+                            </article>
+
+                            <article class="parenting-card quran-card fade-reveal" data-women-card data-search="ഇബാദത്തില്‍ സ്ഥിരത lack of consistency worship prayer zikr fatigue deen">
+                                <div class="issue-card-title">
+                                    <div class="topic-icon"><i class="fas fa-praying-hands"></i></div>
+                                    <h3>7. ഇബാദത്തില്‍ സ്ഥിരത കുറയുക</h3>
+                                </div>
+                                <p class="issue-text">കുടുംബജീവിതം, ക്ഷീണം, വികാരഭാരം എന്നിവ കാരണം ഇബാദത്ത് ചിലപ്പോള്‍ പിന്നിലാകാം.</p>
+                                <span class="ayah-highlight">താഹാ 20:132</span>
+                                <div class="duty-box">
+                                    <strong>👉 പരിഹാരം</strong>
+                                    <ul class="solution-list">
+                                        <li>വലിയ ലക്ഷ്യങ്ങള്‍ക്കു പകരം ചെറിയ സ്ഥിര ഇബാദത്തുകള്‍ തുടങ്ങുക</li>
+                                        <li>ഖുര്‍ആന്‍, ദിഖ്റ്, ദുആ എന്നിവയ്ക്കായി നിശ്ചിത സമയം ഒരുക്കുക</li>
+                                        <li>ക്ഷീണത്തിലും ജീവിതചുമതലകളിലും ദീനിന്റെ ലാളിത്യം ഓര്‍ക്കുക</li>
+                                    </ul>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+
+                    <div class="search-empty" id="womenSearchEmpty">
+                        ഈ തിരച്ചിലിനൊത്ത Women Issues കാര്‍ഡുകള്‍ കണ്ടെത്താനായില്ല.
+                    </div>
+                </div>
+            </section>
+
+            <section id="men" class="men-section fade-reveal">
+                <div class="men-hero">
+                    <div class="parenting-badge">
+                        <i class="fas fa-user-shield"></i>
+                        Men's Guidance
+                    </div>
+                    <h2 class="parenting-title">👨 പുരുഷന്മാരുടെ പ്രശ്നങ്ങൾ</h2>
+                    <p class="parenting-subtitle">ജീവിതത്തിലെ വെല്ലുവിളികളും ഇസ്‌ലാമിക പരിഹാരങ്ങളും</p>
+                </div>
+
+                <div class="parenting-panel-wrap">
+                    <div class="men-search">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="menIssueSearch" placeholder="പ്രശ്നം, പ്രായം, അല്ലെങ്കില്‍ പരിഹാരം തിരയുക...">
+                    </div>
+
+                    <div class="parenting-tabs" role="tablist" aria-label="Men issues tabs">
+                        <button class="parenting-tab active" id="tab-men-quran" type="button" role="tab"
+                            aria-selected="true" aria-controls="panel-men-quran" data-target="panel-men-quran">
+                            🌿 ഖുര്‍ആന്‍ മാര്‍ഗ്ഗനിര്‍ദേശത്തിലുള്ള പ്രശ്നങ്ങള്‍
+                        </button>
+                        <button class="parenting-tab" id="tab-men-age" type="button" role="tab"
+                            aria-selected="false" aria-controls="panel-men-age" data-target="panel-men-age">
+                            🌿 വയസ്സനുസരിച്ചുള്ള പ്രശ്നങ്ങള്‍
+                        </button>
+                    </div>
+
+                    <div class="tab-panel active" id="panel-men-quran" role="tabpanel" aria-labelledby="tab-men-quran">
+                        <div class="section-intro">
+                            <h2>ഖുര്‍ആന്‍ പ്രകാശിപ്പിക്കുന്ന പുരുഷന്മാരുടെ വെല്ലുവിളികള്‍</h2>
+                            <p>
+                                കോപം, സമ്മര്‍ദ്ദം, അഹങ്കാരം, ഉത്തരവാദിത്വം എന്നീ ജീവിതപ്രശ്നങ്ങള്‍ക്ക് ഖുര്‍ആന്‍
+                                ആത്മപരിശോധനയും തുല്യതയും കരുണയും നിറഞ്ഞ മാര്‍ഗ്ഗം നിര്‍ദേശിക്കുന്നു.
+                            </p>
+                        </div>
+
+                        <div class="parenting-grid men-card-grid">
+                            <article class="parenting-card quran-card fade-reveal" data-men-card data-search="കോപം നിയന്ത്രിക്കാനാകാത്തത് anger sabr patience family self control">
+                                <div class="issue-card-title">
+                                    <div class="topic-icon"><i class="fas fa-fire"></i></div>
+                                    <h3>1. കോപം നിയന്ത്രിക്കാനാകാത്തത്</h3>
+                                </div>
+                                <p class="issue-text">വേഗത്തില്‍ പ്രതികരിക്കുന്ന സ്വഭാവം കുടുംബത്തിലും ജോലിയിലും വലിയ മുറിവുകള്‍ ഉണ്ടാക്കാം.</p>
+                                <span class="ayah-highlight">ആല്‍-ഇംറാന്‍ 3:134</span>
+                                <div class="duty-box">
+                                    <strong>👉 പരിഹാരം</strong>
+                                    <ul class="solution-list">
+                                        <li>കോപം വരുമ്പോള്‍ മൗനം പാലിക്കുകയും സ്ഥാനം മാറുകയും ചെയ്യുക</li>
+                                        <li>അല്ലാഹുവിനെ ഓര്‍ക്കുകയും വുദൂ ചെയ്യുകയും ചെയ്യുക</li>
+                                        <li>പ്രതികരണത്തിന് മുമ്പ് ഫലത്തെ ചിന്തിക്കുന്ന ശീലം വളര്‍ത്തുക</li>
+                                    </ul>
+                                </div>
+                            </article>
+
+                            <article class="parenting-card quran-card fade-reveal" data-men-card data-search="സാമ്പത്തിക സമ്മര്‍ദ്ദം finance rizq provision tawakkul debt income pressure">
+                                <div class="issue-card-title">
+                                    <div class="topic-icon"><i class="fas fa-wallet"></i></div>
+                                    <h3>2. സാമ്പത്തിക സമ്മര്‍ദ്ദം</h3>
+                                </div>
+                                <p class="issue-text">ഉപജീവനത്തിന്റെ ഭാരം ചിലപ്പോള്‍ ഭയവും ആത്മവിശ്വാസക്കുറവും സൃഷ്ടിക്കും.</p>
+                                <span class="ayah-highlight">അത്ഹ്-തലാഖ് 65:2-3</span>
+                                <div class="duty-box">
+                                    <strong>👉 പരിഹാരം</strong>
+                                    <ul class="solution-list">
+                                        <li>ഹലാല്‍ ഉപജീവനത്തിലേക്ക് ഉറച്ച നിലപാട് കൈക്കൊള്‍ക്കുക</li>
+                                        <li>തവക്കുല്‍ സഹിതം പദ്ധതിപൂര്‍വ്വമായ ചെലവു നിയന്ത്രണം നടത്തുക</li>
+                                        <li>സദഖയും ഇസ്തിഗ്ഫാറും റിസ്ഖിന്റെ വാതിലുകള്‍ തുറക്കുമെന്ന് വിശ്വസിക്കുക</li>
+                                    </ul>
+                                </div>
+                            </article>
+
+                            <article class="parenting-card quran-card fade-reveal" data-men-card data-search="തെറ്റായ ആകര്‍ഷണങ്ങള്‍ temptation zina desires gaze modesty fitna">
+                                <div class="issue-card-title">
+                                    <div class="topic-icon"><i class="fas fa-eye-slash"></i></div>
+                                    <h3>3. തെറ്റായ ആകര്‍ഷണങ്ങള്‍</h3>
+                                </div>
+                                <p class="issue-text">നോട്ടം, മീഡിയ, ശീലങ്ങള്‍ എന്നിവ നിയന്ത്രിക്കാതെ പോയാല്‍ ആത്മീയ താഴ്ചയും പാപത്തിലേക്കുള്ള വഴിയും തുറക്കും.</p>
+                                <span class="ayah-highlight">അന്നൂര്‍ 24:30</span>
+                                <div class="duty-box">
+                                    <strong>👉 പരിഹാരം</strong>
+                                    <ul class="solution-list">
+                                        <li>നോട്ടം താഴ്ത്തുകയും പ്രലോഭനങ്ങള്‍ കുറയ്ക്കുന്ന ശീലങ്ങള്‍ വളര്‍ത്തുകയും ചെയ്യുക</li>
+                                        <li>ഒറ്റപ്പെട്ട സാഹചര്യങ്ങള്‍ക്കും ഹാനികരമായ ഡിജിറ്റല്‍ ഉപയോഗത്തിനും പരിധി വെക്കുക</li>
+                                        <li>വിവാഹം, ഉപവാസം, ഇബാദത്ത് എന്നിവ വഴി ആത്മനിയന്ത്രണം ശക്തിപ്പെടുത്തുക</li>
+                                    </ul>
+                                </div>
+                            </article>
+
+                            <article class="parenting-card quran-card fade-reveal" data-men-card data-search="ഉത്തരവാദിത്വം ഒഴിവാക്കല്‍ responsibility family leadership amanah duty laziness">
+                                <div class="issue-card-title">
+                                    <div class="topic-icon"><i class="fas fa-briefcase"></i></div>
+                                    <h3>4. ഉത്തരവാദിത്വം ഒഴിവാക്കല്‍</h3>
+                                </div>
+                                <p class="issue-text">കുടുംബം, ജോലി, ദീന്‍ എന്നിവയില്‍ നിന്ന് പിൻമാറുന്നത് ജീവിതത്തെ അസന്തുലിതമാക്കും.</p>
+                                <span class="ayah-highlight">അല്‍-ഇസ്റാ 17:36</span>
+                                <div class="duty-box">
+                                    <strong>👉 പരിഹാരം</strong>
+                                    <ul class="solution-list">
+                                        <li>ഓരോ കടമയും അമാനത്തായി കാണുന്ന ബോധം വളര്‍ത്തുക</li>
+                                        <li>ദിവസക്രമവും ചെറു ലക്ഷ്യങ്ങളുമായി ഉത്തരവാദിത്വം പുനര്‍നിര്‍മിക്കുക</li>
+                                        <li>കുടുംബത്തിനും ദീനിനും സമയം നിശ്ചയിച്ച് സ്ഥിരത പാലിക്കുക</li>
+                                    </ul>
+                                </div>
+                            </article>
+
+                            <article class="parenting-card quran-card fade-reveal" data-men-card data-search="മാനസിക സമ്മര്‍ദ്ദം stress anxiety sadness zikr salah reliance patience">
+                                <div class="issue-card-title">
+                                    <div class="topic-icon"><i class="fas fa-brain"></i></div>
+                                    <h3>5. മാനസിക സമ്മര്‍ദ്ദം</h3>
+                                </div>
+                                <p class="issue-text">അകത്തളത്തിലെ ആശങ്കകള്‍ സംസാരിക്കാതെ കെട്ടിച്ചമച്ചാല്‍ ആത്മീയതയും ബന്ധങ്ങളും ബാധിക്കും.</p>
+                                <span class="ayah-highlight">അര്‍-റഅ്ദ് 13:28</span>
+                                <div class="duty-box">
+                                    <strong>👉 പരിഹാരം</strong>
+                                    <ul class="solution-list">
+                                        <li>ദിഖ്റ്, നമസ്‌കാരം, ദുആ എന്നിവയെ മാനസിക സ്ഥിരതയുടെ ഭാഗമായി കാണുക</li>
+                                        <li>വിശ്വസനീയരായ ആളുകളോട് സംസാരിക്കുന്ന ശീലം വളര്‍ത്തുക</li>
+                                        <li>അതിരുകടന്ന ഭാരം വന്നാല്‍ സഹായം തേടുന്നത് ദൗര്‍ബല്യമല്ലെന്ന് മനസ്സിലാക്കുക</li>
+                                    </ul>
+                                </div>
+                            </article>
+
+                            <article class="parenting-card quran-card fade-reveal" data-men-card data-search="അഹങ്കാരം pride arrogance humility takabbur ego">
+                                <div class="issue-card-title">
+                                    <div class="topic-icon"><i class="fas fa-crown"></i></div>
+                                    <h3>6. അഹങ്കാരം</h3>
+                                </div>
+                                <p class="issue-text">വിജയം, ശക്തി, സ്ഥാനം എന്നിവ തെറ്റായി മനസ്സിലാക്കിയാല്‍ വിനയം ഇല്ലാതാകാം.</p>
+                                <span class="ayah-highlight">ലുക്മാന്‍ 31:18</span>
+                                <div class="duty-box">
+                                    <strong>👉 പരിഹാരം</strong>
+                                    <ul class="solution-list">
+                                        <li>എല്ലാ അനുഗ്രഹവും അല്ലാഹുവിന്റെ ദാനമാണെന്ന് ഓര്‍ക്കുക</li>
+                                        <li>വിനയമുള്ളവരോട് കൂടെ ഇരിക്കുകയും സേവനം ചെയ്യുകയും ചെയ്യുക</li>
+                                        <li>തെറ്റുകള്‍ സമ്മതിക്കാനും മാപ്പ് പറയാനും പരിശീലിക്കുക</li>
+                                    </ul>
+                                </div>
+                            </article>
+
+                            <article class="parenting-card quran-card fade-reveal" data-men-card data-search="കുടുംബത്തില്‍ കടുപ്പം harshness family wife children mercy kindness">
+                                <div class="issue-card-title">
+                                    <div class="topic-icon"><i class="fas fa-home"></i></div>
+                                    <h3>7. കുടുംബത്തില്‍ കടുപ്പം</h3>
+                                </div>
+                                <p class="issue-text">പുറത്തെ സമ്മര്‍ദ്ദം വീട്ടിലേക്ക് കൊണ്ടുവരുന്നത് ഭാര്യക്കും മക്കള്‍ക്കും മാനസിക അകലം സൃഷ്ടിക്കും.</p>
+                                <span class="ayah-highlight">ആല്‍-ഇംറാന്‍ 3:159</span>
+                                <div class="duty-box">
+                                    <strong>👉 പരിഹാരം</strong>
+                                    <ul class="solution-list">
+                                        <li>കുടുംബത്തോട് സംസാരിക്കുമ്പോള്‍ മൃദുത്വം അവലംബിക്കുക</li>
+                                        <li>വീട്ടില്‍ കേള്‍ക്കാനും മനസ്സിലാക്കാനും സമയം നീക്കിവെക്കുക</li>
+                                        <li>അധികാരം തെളിയിക്കലല്ല, കരുണയോടെ നയിക്കലാണ് നേതൃപാട് എന്ന് മനസ്സിലാക്കുക</li>
+                                    </ul>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+
+                    <div class="tab-panel" id="panel-men-age" role="tabpanel" aria-labelledby="tab-men-age">
+                        <div class="section-intro">
+                            <h2>പ്രായത്തിനനുസരിച്ച് മാറുന്ന വെല്ലുവിളികള്‍</h2>
+                            <p>
+                                ഓരോ പ്രായഘട്ടത്തിലും പുരുഷന്റെ പരീക്ഷണങ്ങളും ഉത്തരവാദിത്വങ്ങളും വ്യത്യാസപ്പെടുന്നു.
+                                ഖുര്‍ആനിക ദിശയോടെ ജീവിതത്തെ വായിക്കുമ്പോള്‍ പ്രശ്നങ്ങള്‍ക്ക് രൂപരേഖയും പരിഹാരവും വ്യക്തമായിരിക്കും.
+                            </p>
+                        </div>
+
+                        <div class="parenting-grid men-card-grid">
+                            <article class="parenting-card fade-reveal" data-men-card data-search="13 18 teenage adolescence identity peer pressure anger habits salah">
+                                <div class="card-meta">
+                                    <span class="age-pill"><i class="fas fa-user-graduate"></i> 👦 13-18 വയസ്</span>
+                                    <span class="ayah-chip">ലുക്മാന്‍ 31:17</span>
+                                </div>
+                                <h3>സ്വഭാവവും ദിശയും കണ്ടെത്തുന്ന പ്രായം</h3>
+                                <ul class="responsibility-list">
+                                    <li>സുഹൃത്ത് സമ്മര്‍ദ്ദം</li>
+                                    <li>കോപം, അസഹിഷ്ണുത, വേഗപ്രതികരണം</li>
+                                    <li>ഡിജിറ്റല്‍ ആകര്‍ഷണങ്ങളും ശീലങ്ങളിലെ അസ്ഥിരതയും</li>
+                                </ul>
+                                <div class="duty-box">
+                                    <strong>👉 പരിഹാരം</strong>
+                                    <ul class="solution-list">
+                                        <li>നമസ്‌കാരത്തെയും നല്ല കൂട്ടുകാരെയും ജീവിതത്തിന്റെ അടിത്തറയാക്കുക</li>
+                                        <li>ശരീരശക്തിയെ കളി, പഠനം, ദീന്‍ എന്നിവയിലേക്ക് തിരിക്കുക</li>
+                                        <li>ശീലങ്ങളാണ് ഭാവിയെ നിര്‍മിക്കുന്നതെന്ന് ഓര്‍മപ്പെടുത്തുക</li>
+                                    </ul>
+                                </div>
+                            </article>
+
+                            <article class="parenting-card fade-reveal" data-men-card data-search="19 25 youth career marriage temptation finance purpose independence">
+                                <div class="card-meta">
+                                    <span class="age-pill"><i class="fas fa-user"></i> 👤 19-25 വയസ്</span>
+                                    <span class="ayah-chip">അന്നൂര്‍ 24:32</span>
+                                </div>
+                                <h3>തിരഞ്ഞെടുപ്പുകളുടെ കാലം</h3>
+                                <ul class="responsibility-list">
+                                    <li>പഠനം, ജോലി, വിവാഹം എന്നിവയിലെ അനിശ്ചിതത്വം</li>
+                                    <li>സ്വാതന്ത്ര്യത്തിന്റെ പേരില്‍ തെറ്റായ വഴിതെറ്റല്‍</li>
+                                    <li>ജീവിതലക്ഷ്യം വ്യക്തമല്ലാത്ത അവസ്ഥ</li>
+                                </ul>
+                                <div class="duty-box">
+                                    <strong>👉 പരിഹാരം</strong>
+                                    <ul class="solution-list">
+                                        <li>ഹലാല്‍ തൊഴിലും നല്ല ബന്ധങ്ങളും മുന്‍ഗണന നല്‍കുക</li>
+                                        <li>വലിയ തീരുമാനങ്ങള്‍ക്ക് ഇസ്തിഖാരയും ഉപദേശവും ഉപയോഗിക്കുക</li>
+                                        <li>താല്‍ക്കാലിക സുഖത്തെക്കാള്‍ സ്ഥിരമായ ജീവിതമൂല്യങ്ങള്‍ തിരഞ്ഞെടുക്കുക</li>
+                                    </ul>
+                                </div>
+                            </article>
+
+                            <article class="parenting-card fade-reveal" data-men-card data-search="26 40 marriage family career children leadership burnout money">
+                                <div class="card-meta">
+                                    <span class="age-pill"><i class="fas fa-user-tie"></i> 👨 26-40 വയസ്</span>
+                                    <span class="ayah-chip">അത്ഹ്-തഹ്‌രീം 66:6</span>
+                                </div>
+                                <h3>കുടുംബവും ഉപജീവനവും തുല്യതയില്‍ വയ്ക്കേണ്ട പ്രായം</h3>
+                                <ul class="responsibility-list">
+                                    <li>വരുമാനഭാരം, വായ്പ, കുടുംബച്ചുമതല</li>
+                                    <li>ഭാര്യയോടും മക്കളോടും സമയം കുറയുക</li>
+                                    <li>ആത്മീയ ക്ഷീണം, നമസ്‌കാരത്തിലെ അലക്ഷ്യം</li>
+                                </ul>
+                                <div class="duty-box">
+                                    <strong>👉 പരിഹാരം</strong>
+                                    <ul class="solution-list">
+                                        <li>ജോലി വിജയത്തോടൊപ്പം കുടുംബസാന്നിധ്യവും ലക്ഷ്യമാക്കുക</li>
+                                        <li>വീട്ടില്‍ ദീന്‍ ജീവിക്കുന്ന അന്തരീക്ഷം സൃഷ്ടിക്കുക</li>
+                                        <li>ആഴ്ചയില്‍ കുടുംബസംഭാഷണത്തിനും ഇബാദത്തിനും സ്ഥിര സമയം നിശ്ചയിക്കുക</li>
+                                    </ul>
+                                </div>
+                            </article>
+
+                            <article class="parenting-card fade-reveal" data-men-card data-search="41 60 midlife reflection health family authority patience legacy">
+                                <div class="card-meta">
+                                    <span class="age-pill"><i class="fas fa-user-clock"></i> 🧔 41-60 വയസ്</span>
+                                    <span class="ayah-chip">അല്‍-അഹ്‌കാഫ് 46:15</span>
+                                </div>
+                                <h3>വിലയിരുത്തലിന്റെയും പക്വതയുടെയും പ്രായം</h3>
+                                <ul class="responsibility-list">
+                                    <li>ആരോഗ്യപ്രശ്നങ്ങളും ഉത്തരവാദിത്വഭാരവും</li>
+                                    <li>മക്കളുടെ വളർച്ചയുമായി ബന്ധപ്പെട്ട ആശങ്ക</li>
+                                    <li>കടുപ്പമുള്ള സമീപനം കുടുംബബന്ധത്തെ ബാധിക്കല്‍</li>
+                                </ul>
+                                <div class="duty-box">
+                                    <strong>👉 പരിഹാരം</strong>
+                                    <ul class="solution-list">
+                                        <li>അനുഭവത്തെ കരുണയോടെ പങ്കിടുന്ന നേതാവായി മാറുക</li>
+                                        <li>ആരോഗ്യം, ദുആ, കുടുംബസൗമ്യത എന്നിവയ്ക്ക് മുന്‍ഗണന നല്‍കുക</li>
+                                        <li>നിയന്ത്രണത്തിന് പകരം മാര്‍ഗനിര്‍ദ്ദേശം നല്‍കുന്ന നിലപാട് സ്വീകരിക്കുക</li>
+                                    </ul>
+                                </div>
+                            </article>
+
+                            <article class="parenting-card fade-reveal" data-men-card data-search="60+ old age loneliness wisdom akhirah worship patience dependence">
+                                <div class="card-meta">
+                                    <span class="age-pill"><i class="fas fa-user-alt"></i> 👴 60+ വയസ്</span>
+                                    <span class="ayah-chip">യാസീന്‍ 36:68</span>
+                                </div>
+                                <h3>അഖിറത്തിനെ കൂടുതല്‍ ശ്രദ്ധിക്കുന്ന പ്രായം</h3>
+                                <ul class="responsibility-list">
+                                    <li>ഒറ്റപ്പെട്ടതിന്റെ വികാരം</li>
+                                    <li>ശാരീരിക ക്ഷീണവും ആശ്രിതാവസ്ഥയും</li>
+                                    <li>ഭൂതകാലത്തെ കുറിച്ചുള്ള ഖേദം അല്ലെങ്കില്‍ മാനസിക ഭാരം</li>
+                                </ul>
+                                <div class="duty-box">
+                                    <strong>👉 പരിഹാരം</strong>
+                                    <ul class="solution-list">
+                                        <li>ദുആ, തസ്‌ബീഹ്, ഖുര്‍ആന്‍ എന്നിവയില്‍ ആഴം കൂട്ടുക</li>
+                                        <li>അനുഭവം അടുത്ത തലമുറയ്ക്ക് ഹിക്മത്തോടെ പകര്‍ന്ന് നല്‍കുക</li>
+                                        <li>അല്ലാഹുവിന്റെ കരുണയിലുള്ള പ്രത്യാശയെ ശക്തിപ്പെടുത്തുക</li>
+                                    </ul>
+                                </div>
+                            </article>
+                        </div>
+
+                        <div class="parenting-summary fade-reveal">
+                            <h3>ഒരു വിശ്വാസിയായ പുരുഷന്‍</h3>
+                            <ul class="men-summary-list">
+                                <li>അല്ലാഹുവിനെ ഭയപ്പെട്ട് കോപത്തെയും ആഗ്രഹങ്ങളെയും നിയന്ത്രിക്കുന്നവന്‍</li>
+                                <li>കുടുംബത്തിന് കരുണയും സുരക്ഷയും നല്‍കുന്നവന്‍</li>
+                                <li>ഹലാല്‍ ഉപജീവനത്തിനായി പരിശ്രമിക്കുകയും അമാനത്ത് പാലിക്കുകയും ചെയ്യുന്നവന്‍</li>
+                                <li>തെറ്റ് സംഭവിച്ചാല്‍ മടങ്ങിവരാനും മാപ്പ് പറയാനും ലജ്ജിക്കാത്തവന്‍</li>
+                                <li>ദീനും ദുനിയാവും തുല്യതയില്‍ നിര്‍ത്താന്‍ പരിശ്രമിക്കുന്നവന്‍</li>
+                                <li>അവസാനം വരെ ഇമാനും വിനയവും കൈവിടാതെ ജീവിക്കാന്‍ ശ്രമിക്കുന്നവന്‍</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="search-empty" id="menSearchEmpty">
+                        ഈ തിരച്ചിലിനൊത്ത Men Issues കാര്‍ഡുകള്‍ കണ്ടെത്താനായില്ല.
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+     <script>
+        (function () {
+            var tabGroups = document.querySelectorAll("[data-tab-group], section[aria-label='Parenting tabs']");
+            var menSearchInput = document.getElementById("menIssueSearch");
+            var menSearchCards = document.querySelectorAll("[data-men-card]");
+            var menSearchEmpty = document.getElementById("menSearchEmpty");
+            var womenSearchInput = document.getElementById("womenIssueSearch");
+            var womenSearchCards = document.querySelectorAll("[data-women-card]");
+            var womenSearchEmpty = document.getElementById("womenSearchEmpty");
+
+            function setupTabGroup(group) {
+                var tabs = group.querySelectorAll(".parenting-tab");
+                var panels = group.querySelectorAll(".tab-panel");
+
+                function activateTab(targetId) {
+                    tabs.forEach(function (tab) {
+                        var isActive = tab.getAttribute("data-target") === targetId;
+                        tab.classList.toggle("active", isActive);
+                        tab.setAttribute("aria-selected", isActive ? "true" : "false");
+                    });
+
+                    panels.forEach(function (panel) {
+                        panel.classList.toggle("active", panel.id === targetId);
+                    });
+                }
+
+                tabs.forEach(function (tab) {
+                    tab.addEventListener("click", function () {
+                        activateTab(tab.getAttribute("data-target"));
+                    });
+                });
+            }
+
+            function setupSearch(input, cards, emptyState) {
+                if (!input || !cards.length) {
+                    return;
+                }
+
+                input.addEventListener("input", function () {
+                    var query = input.value.toLowerCase().trim();
+                    var visibleCount = 0;
+
+                    cards.forEach(function (card) {
+                        var haystack = (card.getAttribute("data-search") || "").toLowerCase();
+                        var isVisible = !query || haystack.indexOf(query) !== -1;
+                        card.style.display = isVisible ? "" : "none";
+
+                        if (isVisible) {
+                            visibleCount += 1;
+                        }
+                    });
+
+                    if (emptyState) {
+                        emptyState.classList.toggle("visible", visibleCount === 0);
+                    }
+                });
+            }
+
+            function mountFamilySection() {
+                var marriageSection = document.getElementById("marriage");
+                var familyAnchorLabel = document.querySelector('.anchor-card[href="#family"] strong');
+
+                if (familyAnchorLabel) {
+                    familyAnchorLabel.textContent = "🏡 കുടുംബം";
+                }
+
+                if (!marriageSection) {
+                    return;
+                }
+
+                marriageSection.outerHTML = `
+            <section id="family" class="family-section fade-reveal">
+                <div class="family-header">
+                    <div class="family-kicker">
+                        <i class="fas fa-home"></i>
+                        Family Guidance
+                    </div>
+                    <h2 class="family-title">🏡 കുടുംബം (Family)</h2>
+                    <p class="family-subtitle">ഖുര്‍ആന്‍ മാര്‍ഗ്ഗനിര്‍ദേശത്തിലുള്ള കുടുംബ ജീവിതം</p>
+                </div>
+
+                <div class="family-section-block">
+                    <div class="family-section-heading">
+                        <span class="family-section-icon"><i class="fas fa-seedling"></i></span>
+                        <h3>A. Family Foundation</h3>
+                    </div>
+                    <div class="family-grid">
+                        <article class="family-highlight-card">
+                            <div class="family-card-header">
+                                <h4 class="family-card-title">കുടുംബം എങ്ങനെ ആരംഭിക്കുന്നു?</h4>
+                                <span class="family-card-icon"><i class="fas fa-ring"></i></span>
+                            </div>
+                            <span class="family-ayah">📖 "അവന്റെ ദൃഷ്ടാന്തങ്ങളില്‍ ഒന്നാണ് നിങ്ങള്‍ക്കായി നിങ്ങളുടെ തന്നെ ഇടയില്‍നിന്ന് സഹധര്‍മ്മിണികളെ സൃഷ്ടിച്ചതും, നിങ്ങള്‍ക്ക് അവരില്‍ സമാധാനം കണ്ടെത്തുവാനുമാണ്." (അര്‍-റൂം 30:21)</span>
+                            <p>ഇസ്‌ലാമില്‍ കുടുംബം നിഖാഹിലൂടെ ആരംഭിക്കുന്നു. ഇത് ഒരു സാമൂഹിക കരാറ് മാത്രം അല്ല; അല്ലാഹുവിന്റെ മുമ്പിലുള്ള അമാനത്തും ഉത്തരവാദിത്വവുമാണ്.</p>
+                            <div class="family-keypoint">👉 വിശ്വാസം, മാന്യത, ഉത്തരവാദിത്വം എന്നിവയുടെ അടിസ്ഥാനത്തില്‍ കുടുംബത്തിന്റെ തുടക്കം ഉറപ്പാക്കുക.</div>
+                        </article>
+                        <article class="family-highlight-card">
+                            <div class="family-card-header">
+                                <h4 class="family-card-title">കുടുംബത്തിന്റെ ലക്ഷ്യം</h4>
+                                <span class="family-card-icon"><i class="fas fa-bullseye"></i></span>
+                            </div>
+                            <span class="family-ayah">📖 "നിങ്ങളും നിങ്ങളുടെ കുടുംബവും നരകാഗ്നിയില്‍നിന്ന് കാത്തുസൂക്ഷിക്കുവിന്‍." (അത്തഹ്‌രീം 66:6)</span>
+                            <p>കുടുംബത്തിന്റെ ലക്ഷ്യം സാമ്പത്തിക സുരക്ഷ മാത്രം അല്ല. ഇമാന്‍, സമാധാനം, പരസ്പര വളര്‍ച്ച, അല്ലാഹുവിലേക്കുള്ള യാത്ര എന്നിവയാണ് കുടുംബജീവിതത്തിന്റെ ഹൃദയം.</p>
+                            <div class="family-keypoint">👉 വീട് ദീന്‍, സ്നേഹം, ശീലങ്ങള്‍, ദുആ എന്നിവ ചേര്‍ന്നൊരു സുരക്ഷിത ഇടമാക്കുക.</div>
+                        </article>
+                    </div>
+                </div>
+
+                <div class="family-section-block">
+                    <div class="family-section-heading">
+                        <span class="family-section-icon"><i class="fas fa-user-shield"></i></span>
+                        <h3>B. Roles &amp; Responsibilities</h3>
+                    </div>
+                    <div class="family-grid">
+                        <article class="family-card">
+                            <div class="family-card-header">
+                                <h4 class="family-card-title">ഭര്‍ത്താവ്</h4>
+                                <span class="family-card-icon"><i class="fas fa-user-tie"></i></span>
+                            </div>
+                            <span class="family-ayah">📖 "പുരുഷന്‍മാര്‍ സ്ത്രീകളുടെ സംരക്ഷകരും ഉത്തരവാദികളും ആകുന്നു." (അന്നിസാ 4:34)</span>
+                            <p>സംരക്ഷണം, സാമ്പത്തിക ഉത്തരവാദിത്വം, മാന്യമായ നേതൃത്വം, കരുണയുള്ള ഇടപെടല്‍ എന്നിവ ഭര്‍ത്താവിന്റെ അമാനത്താണ്.</p>
+                            <div class="family-keypoint">👉 കഠിനതയല്ല, കരുണയും ശൂറയും ചേര്‍ന്ന നേതൃമാണ് മാതൃക.</div>
+                        </article>
+                        <article class="family-card">
+                            <div class="family-card-header">
+                                <h4 class="family-card-title">ഭാര്യ</h4>
+                                <span class="family-card-icon"><i class="fas fa-female"></i></span>
+                            </div>
+                            <span class="family-ayah">📖 "സല്‍പ്രവര്‍ത്തകരായ സ്ത്രീകള്‍ അനുസരണയുള്ളവരും അല്ലാഹു കാത്തുസൂക്ഷിക്കുന്നതിനെ കാത്തുസൂക്ഷിക്കുന്നവരുമാണ്." (അന്നിസാ 4:34)</span>
+                            <p>ഭാര്യയുടെ പങ്ക് വീട്ടിന്റെ ആത്മീയ ചൂടും സമാധാനവും നിലനിര്‍ത്തുന്നതിലും വിശ്വാസത്തോടെയുള്ള കൂട്ടായ്മയിലും പ്രകടമാകുന്നു.</p>
+                            <div class="family-keypoint">👉 ബഹുമാനം, ശീലസംരക്ഷണം, പിന്തുണ, തുറന്ന ആശയവിനിമയം എന്നിവ കുടുംബത്തെ ഉറപ്പിക്കുന്നു.</div>
+                        </article>
+                        <article class="family-card">
+                            <div class="family-card-header">
+                                <h4 class="family-card-title">മാതാപിതാക്കള്‍ &amp; മക്കള്‍</h4>
+                                <span class="family-card-icon"><i class="fas fa-users"></i></span>
+                            </div>
+                            <span class="family-ayah">📖 "നിന്റെ രക്ഷിതാക്കള്‍ക്കു നന്മ ചെയ്യുക." (അല്‍-ഇസ്‌റാഅ് 17:23)</span>
+                            <p>മാതാപിതാക്കള്‍ക്ക് വളര്‍ത്തലും ദീന്‍ പഠിപ്പിക്കലും; മക്കള്‍ക്ക് ബഹുമാനവും അനുസരണയും നന്മയിലേക്കുള്ള സഹകരണവും ബാധ്യതയാണ്.</p>
+                            <div class="family-keypoint">👉 വീട്ടില്‍ ഖുര്‍ആന്‍, നമസ്‌കാരം, നന്ദി, ആദരം എന്നിവ പതിവാക്കുക.</div>
+                        </article>
+                    </div>
+                </div>
+
+                <div class="family-section-block">
+                    <div class="family-section-heading">
+                        <span class="family-section-icon"><i class="fas fa-heart"></i></span>
+                        <h3>C. Relationships &amp; Values</h3>
+                    </div>
+                    <div class="family-values-grid">
+                        <article class="family-value-card">
+                            <span class="family-card-icon"><i class="fas fa-heart"></i></span>
+                            <h4>സ്നേഹം</h4>
+                            <p>അല്ലാഹു നല്‍കുന്ന മവദ്ദത്ത് ബന്ധങ്ങളെ മൃദുവാക്കുകയും വീടിനെ സുരക്ഷിതമാക്കുകയും ചെയ്യുന്നു.</p>
+                        </article>
+                        <article class="family-value-card">
+                            <span class="family-card-icon"><i class="fas fa-dove"></i></span>
+                            <h4>കരുണ</h4>
+                            <p>റഹ്മത്ത് ഇല്ലാത്ത ബന്ധം കടുപ്പമാകും; കരുണ അതിനെ സമാധാനമാക്കുന്നു.</p>
+                        </article>
+                        <article class="family-value-card">
+                            <span class="family-card-icon"><i class="fas fa-hourglass-half"></i></span>
+                            <h4>ക്ഷമ</h4>
+                            <p>ക്ഷമ കുടുംബത്തിലെ ചെറിയ പിഴവുകളെ വലിയ പിളര്‍പ്പുകളാക്കാതെ തടയുന്നു.</p>
+                        </article>
+                        <article class="family-value-card">
+                            <span class="family-card-icon"><i class="fas fa-balance-scale"></i></span>
+                            <h4>നീതി</h4>
+                            <p>നീതി പാലിക്കുമ്പോള്‍ വിശ്വാസം വളരുന്നു; പക്ഷപാതം കുടുംബത്തെ തകര്‍ക്കുന്നു.</p>
+                        </article>
+                    </div>
+                </div>
+
+                <div class="family-section-block">
+                    <div class="family-section-heading">
+                        <span class="family-section-icon"><i class="fas fa-tools"></i></span>
+                        <h3>D. Common Problems &amp; Solutions</h3>
+                    </div>
+                    <div class="family-problems-grid">
+                        <article class="family-card">
+                            <div class="family-card-header">
+                                <h4 class="family-card-title">തര്‍ക്കങ്ങള്‍</h4>
+                                <span class="family-card-icon"><i class="fas fa-comments"></i></span>
+                            </div>
+                            <span class="family-ayah">📖 "അവര്‍ തമ്മില്‍ സമാധാനം വരുത്തുക." (അല്‍-ഹുജുറാത്ത് 49:10)</span>
+                            <p>അഹങ്കാരവും ഉടന്‍ പ്രതികരിക്കുന്ന ശീലവും തര്‍ക്കങ്ങളെ വളര്‍ത്തുന്നു. ശൂറയും മൃദുവായ ഭാഷയും അതിനെ കുറയ്ക്കും.</p>
+                            <div class="family-keypoint">👉 കോപസമയത്ത് ഇടവേള എടുക്കുക, പിന്നീട് ശാന്തമായി സംസാരിക്കുക.</div>
+                        </article>
+                        <article class="family-card">
+                            <div class="family-card-header">
+                                <h4 class="family-card-title">സാമ്പത്തിക പ്രശ്നങ്ങള്‍</h4>
+                                <span class="family-card-icon"><i class="fas fa-coins"></i></span>
+                            </div>
+                            <span class="family-ayah">📖 "അല്ലാഹു ഓരോരുത്തർക്കും അവന്‍ നല്‍കിയതില്‍നിന്ന് ചെലവഴിക്കാന്‍ കല്പിക്കുന്നു." (അത്തലാഖ് 65:7)</span>
+                            <p>അളവുകടന്ന പ്രതീക്ഷകളും പദ്ധതിയില്ലാത്ത ചെലവും സമ്മര്‍ദ്ദം വര്‍ധിപ്പിക്കും.</p>
+                            <div class="family-keypoint">👉 ഹലാല്‍ വരുമാനം, ബജറ്റ്, സംയമനം, പരസ്പര തുറന്ന ചര്‍ച്ച എന്നിവ പാലിക്കുക.</div>
+                        </article>
+                        <article class="family-card">
+                            <div class="family-card-header">
+                                <h4 class="family-card-title">ആശയവിനിമയ കുറവ്</h4>
+                                <span class="family-card-icon"><i class="fas fa-comment-slash"></i></span>
+                            </div>
+                            <span class="family-ayah">📖 "ജനങ്ങളോടു നല്ല വാക്ക് സംസാരിക്കുക." (അല്‍-ബഖറ 2:83)</span>
+                            <p>മനസ്സിലുള്ളത് പറയാത്തത് തെറ്റിദ്ധാരണകള്‍ക്ക് വഴിയൊരുക്കും; കേള്‍ക്കാത്തത് അകലങ്ങള്‍ സൃഷ്ടിക്കും.</p>
+                            <div class="family-keypoint">👉 വിധിയെഴുതാതെ കേള്‍ക്കുക, കുറ്റപ്പെടുത്താതെ സംസാരിക്കുക.</div>
+                        </article>
+                        <article class="family-card">
+                            <div class="family-card-header">
+                                <h4 class="family-card-title">സ്നേഹക്കുറവ്</h4>
+                                <span class="family-card-icon"><i class="fas fa-heart-broken"></i></span>
+                            </div>
+                            <span class="family-ayah">📖 "അവരോട് നന്മയോടെ പെരുമാറുക." (അന്നിസാ 4:19)</span>
+                            <p>തിരക്കുകളും പരിഗണനക്കുറവും ബന്ധത്തെ തണുപ്പിക്കുന്നു. ചെറിയ കരുതലുകള്‍ പോലും വലിയ മാറ്റം സൃഷ്ടിക്കും.</p>
+                            <div class="family-keypoint">👉 നന്ദി പറയുക, സമയം നല്‍കുക, സ്നേഹം വാക്കിലും പ്രവൃത്തിയിലും പ്രകടിപ്പിക്കുക.</div>
+                        </article>
+                    </div>
+                </div>
+
+                <div class="family-section-block">
+                    <div class="family-section-heading">
+                        <span class="family-section-icon"><i class="fas fa-check-circle"></i></span>
+                        <h3>E. Rights &amp; Duties</h3>
+                    </div>
+                    <div class="family-mini-grid">
+                        <article class="family-mini-card">
+                            <h4>✔ ഭര്‍ത്താവ്</h4>
+                            <p>സാമ്പത്തിക സംരക്ഷണം, മാന്യത, സുരക്ഷ, നീതി, ആത്മീയ നേതൃത്വം.</p>
+                        </article>
+                        <article class="family-mini-card">
+                            <h4>✔ ഭാര്യ</h4>
+                            <p>മഹ്‌ര്‍, ബഹുമാനം, സുരക്ഷ, പരിപാലനം, സൗമ്യമായ സഹവാസം.</p>
+                        </article>
+                        <article class="family-mini-card">
+                            <h4>✔ മാതാപിതാക്കള്‍</h4>
+                            <p>ബഹുമാനം, കരുതല്‍, ദുആ, വയസ്സാകുമ്പോള്‍ സേവനം, കടുപ്പമില്ലാത്ത വാക്ക്.</p>
+                        </article>
+                        <article class="family-mini-card">
+                            <h4>✔ മക്കള്‍</h4>
+                            <p>നല്ല പേര്, ദീന്‍ വിദ്യാഭ്യാസം, സ്‌നേഹത്തോടെ വളര്‍ത്തല്‍, നീതിയുള്ള പരിഗണന.</p>
+                        </article>
+                    </div>
+                </div>
+
+                <div class="family-section-block">
+                    <div class="family-section-heading">
+                        <span class="family-section-icon"><i class="fas fa-gem"></i></span>
+                        <h3>F. Marriage &amp; Relationship</h3>
+                    </div>
+                    <article class="family-highlight-card">
+                        <div class="family-card-header">
+                            <h4 class="family-card-title">വിവാഹം: പരസ്പരം സംരക്ഷിക്കുന്ന ബന്ധം</h4>
+                            <span class="family-card-icon"><i class="fas fa-hand-holding-heart"></i></span>
+                        </div>
+                        <span class="family-ayah">📖 "അവര്‍ നിങ്ങള്‍ക്കുള്ള വസ്ത്രവും നിങ്ങള്‍ അവര്‍ക്കുള്ള വസ്ത്രവുമാണ്." (അല്‍-ബഖറ 2:187)</span>
+                        <p>ഈ ആയത്ത് വിവാഹബന്ധത്തെ സംരക്ഷണം, സൗന്ദര്യം, മറ, അടുക്കല്‍, ആശ്വാസം എന്നീ അര്‍ഥങ്ങളിലൂടെ അവതരിപ്പിക്കുന്നു. ഭാര്യാഭര്‍ത്താക്കള്‍ തമ്മില്‍ ഒരുമിച്ച് നില്‍ക്കുമ്പോഴാണ് കുടുംബം ശക്തിയാര്‍ജിക്കുന്നത്.</p>
+                        <div class="family-keypoint">👉 ബന്ധത്തില്‍ വിശ്വാസം, മാന്യത, പരസ്പര മറച്ചുവെക്കല്‍, ഒരുമിച്ചുള്ള വളര്‍ച്ച എന്നിവ പ്രധാനമാക്കുക.</div>
+                    </article>
+                </div>
+
+                <div class="family-section-block">
+                    <div class="family-section-heading">
+                        <span class="family-section-icon"><i class="fas fa-exclamation-triangle"></i></span>
+                        <h3>G. Divorce Guidance</h3>
+                    </div>
+                    <article class="family-card family-warning-card">
+                        <div class="family-card-header">
+                            <h4 class="family-card-title">വിവാഹമോചനം: അവസാന മാര്‍ഗ്ഗം, അനീതിയല്ല</h4>
+                            <span class="family-card-icon"><i class="fas fa-unlink"></i></span>
+                        </div>
+                        <span class="family-ayah">📖 "വിവാഹമോചനം രണ്ടുതവണയാണ്; ശേഷം നല്ല രീതിയില്‍ നിലനിര്‍ത്തലോ സൗമ്യമായി വിട്ടയക്കലോ." (അല്‍-ബഖറ 2:229)</span>
+                        <p>ഇസ്‌ലാം വിവാഹമോചനത്തെ ലഘുവാക്കുന്നില്ല. എന്നാല്‍ അനീതിയും സ്ഥിരമായ ഹാനിയും ഒഴിവാക്കാന്‍ ശുദ്ധമായ നടപടിക്രമം നല്‍കുന്നു.</p>
+                        <div class="family-keypoint">👉 അതിവേഗ തീരുമാനം ഒഴിവാക്കി, മധ്യസ്ഥത, ഇദ്ദത്, മാന്യത, കുട്ടികളുടെ അവകാശം എന്നിവ കാത്തുസൂക്ഷിക്കുക.</div>
+                    </article>
+                </div>
+
+                <div class="family-section-block">
+                    <div class="family-section-heading">
+                        <span class="family-section-icon"><i class="fas fa-star-and-crescent"></i></span>
+                        <h3>H. Final Summary</h3>
+                    </div>
+                    <div class="family-summary-box">
+                        <h3>ഒരു ഇസ്‌ലാമിക കുടുംബം:</h3>
+                        <ul class="family-summary-list">
+                            <li>വിവാഹത്തില്‍ ആരംഭിക്കുന്നു</li>
+                            <li>സ്നേഹവും കരുണയും അടിസ്ഥാനമാക്കുന്നു</li>
+                            <li>ഉത്തരവാദിത്വം പങ്കിടുന്നു</li>
+                            <li>നീതി പാലിക്കുന്നു</li>
+                            <li>അല്ലാഹുവിനെ കേന്ദ്രമാക്കുന്നു</li>
+                        </ul>
+
+                        <div class="family-toggle">
+                            <button class="family-toggle-button" type="button" data-family-toggle aria-expanded="false" aria-controls="familyDetails">
+                                <span>കൂടുതല്‍ വിശദീകരണം കാണുക</span>
+                                <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                            </button>
+                            <div class="family-toggle-panel" id="familyDetails">
+                                <p>ഈ കുടുംബ മാതൃകയുടെ ഹൃദയം അല്ലാഹുവിനോടുള്ള ഭയം, പരസ്പര ബഹുമാനം, ദുആ, ക്ഷമ, ശൂറ, നന്മയില്‍ സഹകരണം എന്നിവയാണ്. വീട് ലോകജീവിതത്തിന്റെ സൗകര്യമാത്രമല്ല; ആഖിറത്തിലേക്കുള്ള യാത്രയില്‍ ഒരുമിച്ച് സഹായിക്കുന്ന ഇടവഴിയാണ്.</p>
+                                <ul class="family-points">
+                                    <li>👉 പ്രശ്നസമയത്ത് ശാന്തതയും മധ്യസ്ഥതയും മുന്‍ഗണന നല്‍കുക.</li>
+                                    <li>👉 വീട്ടില്‍ ഖുര്‍ആന്‍, നമസ്‌കാരം, ദിക്റ്, ദുആ എന്നിവയ്ക്ക് സ്ഥിരമായ സമയം നല്‍കുക.</li>
+                                    <li>👉 ഓരോ അംഗത്തിന്റെയും അവകാശം ലംഘിക്കാതെ ദൗത്യം പങ്കിടുക.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>`;
+            }
+
+            function setupFamilyToggle(button) {
+                var panelId = button.getAttribute("aria-controls");
+                var panel = panelId ? document.getElementById(panelId) : null;
+
+                if (!panel) {
+                    return;
+                }
+
+                button.addEventListener("click", function () {
+                    var isExpanded = button.getAttribute("aria-expanded") === "true";
+                    button.setAttribute("aria-expanded", isExpanded ? "false" : "true");
+                    panel.classList.toggle("is-open", !isExpanded);
+                });
+            }
+
+            mountFamilySection();
+
+            var familyToggleButtons = document.querySelectorAll("[data-family-toggle]");
+            var revealItems = document.querySelectorAll(".fade-reveal");
+
+            tabGroups.forEach(function (group) {
+                setupTabGroup(group);
+            });
+
+            setupSearch(menSearchInput, menSearchCards, menSearchEmpty);
+            setupSearch(womenSearchInput, womenSearchCards, womenSearchEmpty);
+            familyToggleButtons.forEach(function (button) {
+                setupFamilyToggle(button);
+            });
+
+            if ("IntersectionObserver" in window && revealItems.length) {
+                var observer = new IntersectionObserver(function (entries, currentObserver) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add("revealed");
+                            currentObserver.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.12 });
+
+                revealItems.forEach(function (item) {
+                    observer.observe(item);
+                });
+            } else {
+                revealItems.forEach(function (item) {
+                    item.classList.add("revealed");
+                });
+            }
+        }());
+    </script>
+
+     <nav class="bottom-nav"></nav>
+    <nav class="bottom-nav">
+        <a href="index-new.html" class="nav-item" data-page="index-new.html">
+            <span class="nav-item__icon"><i class="bi bi-house"></i></span>
+            <span class="nav-item__label">Home</span>
+        </a>
+        <a href="masala-new.html" class="nav-item" data-page="masala-new.html">
+            <span class="nav-item__icon"><i class="bi bi-newspaper"></i></span>
+            <span class="nav-item__label">Mas'ala</span>
+        </a>
+        <a href="artcle.html" class="nav-item" data-page="artcle.html">
+            <span class="nav-item__icon"><i class="bi bi-journal"></i></span>
+            <span class="nav-item__label">Article</span>
+        </a>
+        <a href="contact-new.html" class="nav-item" data-page="contact-new.html">
+            <span class="nav-item__icon"><i class="bi bi-telephone"></i></span>
+            <span class="nav-item__label">Contact</span>
+        </a>
+        <a href="ask.html" class="nav-item" data-page="profile-new.html">
+            <span class="nav-item__icon">👤</span>
+            <span class="nav-item__label">Ask</span>
+        </a>
+    </nav>
+
+    <script src="js/app.js"></script>
+
+    <a href="#" class="btn btn-primary btn-square back-to-top"><i class="fa fa-arrow-up"></i></a>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/app.js"></script>
+    
+
+    <script>
+        let currentSearchQuery = "";
+        let currentCategory = "all";
+
+        function categoryLabel(category) {
+            const labels = {
+                nikah: "💍 നികാഹ്",
+                talaq: "⚖️ തലാഖ്",
+                ibadah: "🧎 ഇബാദത്ത്",
+                family: "👨‍👩‍👧 കുടുംബം",
+                business: "💼 ബിസിനസ്",
+                modern: "✨ ആധുനികം"
+            };
+
+            return labels[category] || category;
+        }
+
+        function createMasalaCard(masala, index) {
+            return `
+                <article class="masala-card fade-in" data-index="${index}">
+                    <div class="masala-category">${categoryLabel(masala.category)}</div>
+                    <div class="masala-question" tabindex="0" role="button" aria-expanded="false" aria-controls="answer-${index}">
+                        <div class="masala-question-main">
+                            <span class="masala-label">ചോദ്യം</span>
+                            <div class="masala-question-text">${masala.question}</div>
+                        </div>
+                        <span class="masala-toggle"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="masala-answer-wrap" id="answer-${index}">
+                        <div class="masala-answer">
+                            <span class="masala-label">ഉത്തരം</span>
+                            <div>${masala.answer}</div>
+                        </div>
+                    </div>
+                    <div class="masala-actions">
+                        <button class="btn-masala" type="button" onclick="copyToClipboard(${JSON.stringify(masala.answer)})">📋 പകർത്തുക</button>
+                    </div>
+                </article>
+            `;
+        }
+
+        function filterMasalas(query = currentSearchQuery, category = currentCategory) {
+            let filtered = masalaData;
+
+            if (category !== "all") {
+                filtered = filtered.filter((masala) => masala.category === category);
+            }
+
+            if (query.trim()) {
+                const lowerQuery = query.toLowerCase();
+                filtered = filtered.filter((masala) =>
+                    masala.question.toLowerCase().includes(lowerQuery) ||
+                    masala.answer.toLowerCase().includes(lowerQuery)
+                );
+            }
+
+            return filtered;
+        }
+
+        function renderMasalaCards() {
+            const grid = document.getElementById("masalaGrid");
+            const noResults = document.getElementById("noResults");
+            const filtered = filterMasalas();
+
+            if (!filtered.length) {
+                grid.innerHTML = "";
+                noResults.style.display = "block";
+                return;
+            }
+
+            grid.innerHTML = filtered.map((masala, index) => createMasalaCard(masala, index)).join("");
+            noResults.style.display = "none";
+        }
+
+        function toggleAnswer(card) {
+            const answerWrap = card.querySelector(".masala-answer-wrap");
+            const trigger = card.querySelector(".masala-question");
+            const isExpanded = card.classList.toggle("expanded");
+
+            trigger.setAttribute("aria-expanded", isExpanded ? "true" : "false");
+            answerWrap.style.maxHeight = isExpanded ? `${answerWrap.scrollHeight}px` : "0px";
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert("ഉത്തരം പകർത്തി!");
+            }).catch(() => {
+                const textArea = document.createElement("textarea");
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand("copy");
+                document.body.removeChild(textArea);
+                alert("ഉത്തരം പകർത്തി!");
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const searchInput = document.getElementById("masalaSearch");
+            const categoryFilter = document.getElementById("categoryFilter");
+
+            renderMasalaCards();
+
+            searchInput.addEventListener("input", function () {
+                currentSearchQuery = this.value;
+                renderMasalaCards();
+            });
+
+            categoryFilter.addEventListener("change", function () {
+                currentCategory = this.value;
+                renderMasalaCards();
+            });
+
+            document.addEventListener("click", function (event) {
+                const question = event.target.closest(".masala-question");
+                if (!question) return;
+                toggleAnswer(question.closest(".masala-card"));
+            });
+
+            document.addEventListener("keydown", function (event) {
+                const question = event.target.closest(".masala-question");
+                if (!question) return;
+                if (event.key !== "Enter" && event.key !== " ") return;
+
+                event.preventDefault();
+                toggleAnswer(question.closest(".masala-card"));
+            });
+        });
+
+        // Navbar toggle for mobile
+        const navbarToggle = document.getElementById('navbarToggle');
+        const navbarNav = document.getElementById('navbarNav');
+
+        navbarToggle?.addEventListener('click', () => {
+            navbarNav.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.navbar-nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                navbarNav.classList.remove('active');
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navbarToggle.contains(e.target) && !navbarNav.contains(e.target)) {
+                navbarNav.classList.remove('active');
+            }
+        });
+        
+    </script>
+ <script></script>
+</body>
+</html>

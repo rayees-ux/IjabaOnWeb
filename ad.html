@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ad Test Page</title>
+
+<style>
+/* 🔥 AD OVERLAY */
+.ad-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.5);
+  z-index: 9999;
+}
+
+/* 🎨 AD BOX */
+.ad-box {
+  background: #fff;
+  padding: 20px;
+  border-radius: 16px;
+  position: relative;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+  animation: popIn 0.4s ease;
+}
+
+/* ✖ CLOSE */
+.ad-close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  border: none;
+  cursor: pointer;
+  background: #eee;
+}
+
+.ad-close:hover {
+  background: red;
+  color: white;
+}
+
+/* 🖼 IMAGE */
+.ad-image {
+  border-radius: 10px;
+  max-width: 100%;
+}
+
+/* ✨ ANIMATION */
+@keyframes popIn {
+  from {transform: scale(0.7); opacity: 0;}
+  to {transform: scale(1); opacity: 1;}
+}
+</style>
+
+</head>
+<body>
+
+<h1 style="text-align:center;">Test Page</h1>
+
+<!-- 🔥 AD POPUP -->
+<div id="adPopup" class="ad-popup">
+  <div class="ad-box">
+    <button class="ad-close" onclick="closeAd()">✖</button>
+
+    <img id="adImage" class="ad-image">
+
+    <h3>കൃതികൾ ക്ഷണിക്കുന്നു</h3>
+    <p>നിങ്ങളുടെ അറിവും ചിന്തകളും ലോകവുമായി പങ്കുവെക്കൂ</p>
+  </div>
+</div>
+
+<script>
+// 🖼 AD IMAGES
+const adImages = [
+  "image.png",
+  "image.png",
+  "image.png"
+];
+
+// 🎲 RANDOM IMAGE
+function getRandomImage() {
+  return adImages[Math.floor(Math.random() * adImages.length)];
+}
+
+// 📏 AUTO SIZE
+function setImageSize(src) {
+  const img = document.getElementById("adImage");
+  const match = src.match(/(\d+)x(\d+)/);
+
+  if (match) {
+    img.style.width = match[1] + "px";
+    img.style.height = match[2] + "px";
+  } else {
+    img.style.width = "300px";
+  }
+}
+
+// 🚀 SHOW AD
+function showAd() {
+  const imgSrc = getRandomImage();
+
+  const img = document.getElementById("adImage");
+  img.src = imgSrc;
+
+  setImageSize(imgSrc);
+
+  document.getElementById("adPopup").style.display = "flex";
+}
+
+// ❌ CLOSE
+function closeAd() {
+  document.getElementById("adPopup").style.display = "none";
+}
+
+// ⏱️ RUN SYSTEM
+window.onload = function() {
+  setTimeout(showAd, 1500); // first show
+
+  setInterval(showAd, 5000); // every 4 min
+};
+</script>
+
+</body>
+</html>
